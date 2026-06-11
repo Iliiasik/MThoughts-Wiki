@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkmidnightthoughts_wiki=self.webpackChunkmidnightthoughts_wiki||[]).push([["9177"],{8866(t){t.exports=JSON.parse('{"metadata":{"permalink":"/MThoughts-Wiki/blog","page":1,"postsPerPage":10,"totalPages":1,"totalCount":4,"blogDescription":"Blog","blogTitle":"Blog"}}')}}]);
