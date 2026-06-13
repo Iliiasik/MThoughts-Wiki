@@ -1,0 +1,184 @@
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+import Admonition from '@theme/Admonition';
+
+# Well Rested
+
+<Admonition type="info">
+    Well Rested provides bonuses to speed, strength, and block mining speed, increases the player's HP, and also adds gradual health regeneration. The effect of the additional health and regeneration doesn't diminish over time, unlike other buffs.
+</Admonition>
+
+The Well Rested level depends on the [comfort](./comfort-system) of the sleeping area.
+
+After waking up, the player receives the **Rested** effect. The effect has **up to 5 levels** — higher levels increase **strength** and **duration**.
+
+Each level progresses through **three phases**, gradually weakening over time:
+
+| Phase | Strength |
+|---|---|
+| Phase 1 | Strongest |
+| Phase 2 | Medium |
+| Phase 3 | Weakest |
+
+<Admonition type="tip">
+    Higher Rested levels are always stronger overall. For example, Phase 3 of Level 5 is still stronger than Phase 1 of Level 1.
+</Admonition>
+
+If a player goes to bed with the Well Rested buff, they will only receive a new buff upon waking if it is stronger than the buff they already have. For example, if a player currently has Well Rested at level 4, sleeping in a location that only provides Well Rested at level 1 will keep their level 4 buff. However, if the current buff is stronger but is about to expire, the player will receive a new one, even if it is weaker.
+
+![Well Rested](/img/well_rested.png)
+
+
+You can completely disable the HUD display using the following config parameter:
+`"hideWellRestedHud": false`
+
+<Admonition type="info">
+    The HUD's position above the hunger bar is unique to NeoForge; in other versions, the HUD is in the lower left corner. NeoForge has a unique config parameter:
+    `"wellRestedHudPosition": "primary"`
+    This changes the position of the well-rested hud. "Primary" is above the hunger bar, while "alternative" is in the lower left corner.
+</Admonition>
+
+![Well Rested Left](/img/well_rested_left.png)
+
+
+---
+
+## Config
+
+In the config, the following fields are responsible for the strength of the effects:
+
+<Tabs>
+    <TabItem value="level5" label="Level 5" default>
+
+        ```json
+        "level5": {
+        "durationMinutes": 15,
+        "speedPhase1": 0.5,
+        "speedPhase2": 0.3,
+        "speedPhase3": 0.16,
+        "strengthPhase1": 0.24,
+        "strengthPhase2": 0.16,
+        "strengthPhase3": 0.08,
+        "hastePhase1": 0.35,
+        "hastePhase2": 0.2,
+        "hastePhase3": 0.1,
+        "attackSpeedPhase1": 0.12,
+        "attackSpeedPhase2": 0.06,
+        "attackSpeedPhase3": 0.03,
+        "healthBonus": 10.0,
+        "regenBonus": 0.1
+    }
+        ```
+
+    </TabItem>
+    <TabItem value="level4" label="Level 4">
+
+        ```json
+        "level4": {
+        "durationMinutes": 10,
+        "speedPhase1": 0.4,
+        "speedPhase2": 0.24,
+        "speedPhase3": 0.12,
+        "strengthPhase1": 0.2,
+        "strengthPhase2": 0.12,
+        "strengthPhase3": 0.06,
+        "hastePhase1": 0.28,
+        "hastePhase2": 0.16,
+        "hastePhase3": 0.08,
+        "attackSpeedPhase1": 0.1,
+        "attackSpeedPhase2": 0.05,
+        "attackSpeedPhase3": 0.02,
+        "healthBonus": 8.0,
+        "regenBonus": 0.08
+    }
+        ```
+
+    </TabItem>
+    <TabItem value="level3" label="Level 3">
+
+        ```json
+        "level3": {
+        "durationMinutes": 7,
+        "speedPhase1": 0.32,
+        "speedPhase2": 0.18,
+        "speedPhase3": 0.08,
+        "strengthPhase1": 0.16,
+        "strengthPhase2": 0.08,
+        "strengthPhase3": 0.04,
+        "hastePhase1": 0.22,
+        "hastePhase2": 0.12,
+        "hastePhase3": 0.06,
+        "attackSpeedPhase1": 0.08,
+        "attackSpeedPhase2": 0.04,
+        "attackSpeedPhase3": 0.02,
+        "healthBonus": 6.0,
+        "regenBonus": 0.06
+    }
+        ```
+
+    </TabItem>
+    <TabItem value="level2" label="Level 2">
+
+        ```json
+        "level2": {
+        "durationMinutes": 5,
+        "speedPhase1": 0.24,
+        "speedPhase2": 0.12,
+        "speedPhase3": 0.06,
+        "strengthPhase1": 0.12,
+        "strengthPhase2": 0.06,
+        "strengthPhase3": 0.03,
+        "hastePhase1": 0.16,
+        "hastePhase2": 0.08,
+        "hastePhase3": 0.04,
+        "attackSpeedPhase1": 0.06,
+        "attackSpeedPhase2": 0.03,
+        "attackSpeedPhase3": 0.01,
+        "healthBonus": 4.0,
+        "regenBonus": 0.04
+    }
+        ```
+
+    </TabItem>
+    <TabItem value="level1" label="Level 1">
+
+        ```json
+        "level1": {
+        "durationMinutes": 3,
+        "speedPhase1": 0.16,
+        "speedPhase2": 0.08,
+        "speedPhase3": 0.04,
+        "strengthPhase1": 0.08,
+        "strengthPhase2": 0.04,
+        "strengthPhase3": 0.02,
+        "hastePhase1": 0.1,
+        "hastePhase2": 0.05,
+        "hastePhase3": 0.02,
+        "attackSpeedPhase1": 0.04,
+        "attackSpeedPhase2": 0.02,
+        "attackSpeedPhase3": 0.01,
+        "healthBonus": 2.0,
+        "regenBonus": 0.02
+    }
+        ```
+
+    </TabItem>
+</Tabs>
+
+The strength of each buff can be adjusted for any effect level and any phase. `durationMinutes` indicates the total duration of the effect for the specified level.
+
+The values in the buff parameters represent a multiplier added to the player's vanilla stats. For example, in a vanilla game a player's speed is 1 — receiving `speedPhase1: 0.5` makes it 1.5. This applies to all stats, meaning all potions also stack with the Well Rested effect.
+
+---
+
+## Regeneration
+
+`regenBonus` restores the player's health every 5 seconds. The amount of healing is calculated as a percentage of the player's maximum health:
+
+heal = maxHealth × regenBonus × 0.5
+
+For example, with 20 HP (10 hearts) and `regenBonus = 0.1` — restores 1 HP (0.5 hearts) every 5 seconds.
+
+<Admonition type="note">
+    Regeneration and health increase remain the same regardless of the current phase of the effect.
+</Admonition>

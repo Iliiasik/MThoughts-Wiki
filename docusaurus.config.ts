@@ -31,6 +31,7 @@ const config: Config = {
       {
         docs: {
           sidebarPath: './sidebars.ts',
+          routeBasePath: '/',
         },
         blog: {
           showReadingTime: true,
@@ -55,53 +56,38 @@ const config: Config = {
       respectPrefersColorScheme: true,
     },
     navbar: {
-      title: 'Midnight Thoughts',
       logo: {
         alt: 'Midnight Thoughts Logo',
-        src: 'img/logo.svg',
+        src: 'img/logo.png',
       },
+      title: 'Wiki',
       items: [
         {
-          type: 'docSidebar',
-          sidebarId: 'wikiSidebar',
-          position: 'left',
-          label: 'Wiki',
-        },
-        {
           to: '/blog',
-          label: 'Blog',
+          label: 'Updates',
           position: 'left',
         },
         {
-          href: 'https://github.com/Iliiasik/MThoughts-Wiki',
+          href: 'https://github.com/Iliiasik/MThoughts',
           label: 'GitHub',
           position: 'right',
         },
-      ],
-    },
-    footer: {
-      style: 'dark',
-      links: [
         {
-          title: 'Wiki',
-          items: [
-            {
-              label: 'Getting Started',
-              to: '/docs/intro',
-            },
-          ],
+          href: 'https://github.com/Iliiasik/MThoughts/issues',
+          label: 'Issues & Suggestions',
+          position: 'right',
         },
         {
-          title: 'Links',
-          items: [
-            {
-              label: 'GitHub',
-              href: 'https://github.com/Iliiasik/MThoughts-Wiki',
-            },
-          ],
+          href: 'https://www.curseforge.com/minecraft/mc-mods/midnight-thoughts',
+          label: 'CurseForge',
+          position: 'right',
+        },
+        {
+          href: 'https://modrinth.com/mod/midnight-thoughts',
+          label: 'Modrinth',
+          position: 'right',
         },
       ],
-      copyright: `Copyright © ${new Date().getFullYear()} Midnight Thoughts.`,
     },
     prism: {
       theme: prismThemes.github,

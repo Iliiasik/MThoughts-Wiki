@@ -1,0 +1,48 @@
+import Admonition from '@theme/Admonition';
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+# For servers
+
+## Server behavior
+
+The mod respects the vanilla **`playerSleepingPercentage`** gamerule.
+
+If this value is set **below 100%**, only players who actually slept during the night will receive:
+- the **Rested effect**
+- the **night summary**
+
+Players who did not sleep will not receive these rewards.
+
+---
+
+## Rest counter handling
+
+The config includes the following option:
+
+```json
+"server": {
+  "resetPhantomTimerForNonSleepers": true
+}
+```
+
+This setting controls how the **phantom rest timer** (`timeSinceLastRest`) is reset when the night is skipped.
+
+<Tabs>
+    <TabItem value="true" label="enabled (true)" default>
+
+        - The rest timer is reset for **all players**
+        - Even players who **did not sleep** will have their counter reset
+
+        <Admonition type="tip">
+            Prevents situations where players who didn't participate in skipping the night are still targeted by phantoms later.
+        </Admonition>
+
+    </TabItem>
+    <TabItem value="false" label="disabled (false)">
+
+        - The rest timer is reset **only for players who actually slept**
+        - Players who didn't sleep keep their `timeSinceLastRest` value and may still be targeted by phantoms on future nights
+
+    </TabItem>
+</Tabs>

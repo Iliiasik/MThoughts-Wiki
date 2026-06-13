@@ -1,0 +1,101 @@
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+import Admonition from '@theme/Admonition';
+
+# Sleep overlay
+
+When the player goes to bed, they see an overlay.
+
+![Sleep overlay](/img/sleep_overlay.png)
+
+The overlay includes an image of the moon and random facts, or an image of a skull and corresponding nightmares.
+
+![Nightmares](/img/nightmares.png)
+
+The moon displays the current phase of the Minecraft world.
+
+![Moon phases](/img/moon_phases.gif)
+
+
+To trigger nightmares, the sleeping comfort must be less than 0. If it's greater than -1, the player won't be able to sleep at all. More information about comfort is available in the [comfort system](./comfort-system) tab.
+
+The overlay is fully customizable.
+
+---
+
+## Config
+
+<Tabs>
+    <TabItem value="timing" label="Timing" default>
+
+        | Parameter | Default | Description |
+        |---|---|---|
+        | `minSlideDisplayTimeMs` | 2500 | Minimum slide duration in milliseconds |
+        | `maxSlideDisplayTimeMs` | 4000 | Maximum slide duration in milliseconds |
+        | `fadeInDurationMs` | 300 | How quickly a new slide appears |
+        | `fadeOutDurationMs` | 300 | How quickly a slide disappears |
+
+        The final slide time is randomly chosen between `minSlideDisplayTimeMs` and `maxSlideDisplayTimeMs`, allowing more vibrant slides with varying durations.
+
+        <Admonition type="warning">
+            `fadeInDurationMs` and `fadeOutDurationMs` are not available in Forge 1.20.1.
+        </Admonition>
+
+    </TabItem>
+    <TabItem value="appearance" label="Appearance">
+
+        | Parameter | Default | Description |
+        |---|---|---|
+        | `overlayOpacity` | 0.4 | Transparency of the entire overlay background (excludes text and images) |
+        | `textOpacity` | 1.0 | Transparency of text, where 1 = 100% |
+        | `imageOpacity` | 0.6 | Transparency of images, where 1 = 100% |
+        | `specialSlideChance` | 0.05 | Percentage chance of a special slide appearing |
+        | `enableImage` | true | Enables or disables the overlay image (moon or skull) |
+
+        <Admonition type="warning">
+            `overlayOpacity`, `textOpacity`, and `imageOpacity` are not available in Forge 1.20.1.
+        </Admonition>
+
+    </TabItem>
+    <TabItem value="behavior" label="Behavior">
+
+        | Parameter | Default | Description |
+        |---|---|---|
+        | `hideChatWhenSleeping` | true | Blocks chat messages while the player is sleeping, allowing them to better see the overlay |
+        | `enableOverlay` | true | Completely disables the overlay when set to `false` |
+
+    </TabItem>
+</Tabs>
+
+---
+
+## Text while sleeping
+
+While sleeping, players receive different types of messages, including:
+
+- **Facts** — real-world style random facts
+- **Lore** — in-game universe lore and background details
+- **Surreal thoughts** — abstract, dream-like messages
+- **Special messages** — rare and unique events with higher significance
+
+### Supported languages
+
+<Tabs>
+    <TabItem value="en" label="English" default>
+
+        Useless Facts API + local database (~500 entries).
+
+    </TabItem>
+    <TabItem value="de" label="German">
+
+        Useless Facts API + local database (~500 entries).
+
+    </TabItem>
+    <TabItem value="es" label="Spanish">
+
+        Local database only (~500 entries). API is not available for this language.
+
+    </TabItem>
+</Tabs>
+
+For all languages there is a local fact database of approximately 500 entries, which is activated if the API is unavailable, there is no internet connection, or other factors, including a disabled function in the configuration.

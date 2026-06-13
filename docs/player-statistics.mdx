@@ -1,0 +1,70 @@
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+import Admonition from '@theme/Admonition';
+
+# Player statistics
+
+The mod collects the following player statistics:
+
+| Statistic | Description |
+|---|---|
+| Blocks broken | Number of broken blocks |
+| Distance traveled | Number of blocks passed, regardless of movement method |
+| Deaths | Number of deaths |
+| Jumps | Number of jumps |
+| Mobs killed | Number of mobs killed |
+| Damage dealt | Amount of damage dealt |
+
+After players sleep, they will see a summary of the accumulated data since their last sleep. In addition to statistics, achievements are also displayed. The default achievements are stat records: distance record, block mining record, and mob kill record.
+
+Custom achievements are also displayed; more information is available in the [custom achievements](./custom-achievements) tab.
+
+---
+
+## MVP
+
+Multiplayer features an MVP — the player with the most points since their last sleep. If other players slept while a player was awake, their stats are not reset; the counter is unique to each player.
+
+<Tabs>
+    <TabItem value="points" label="Points" default>
+
+        | Parameter | Value | Description |
+        |---|---|---|
+        | `pointsPerDistance100` | 2 | Points per 100 blocks traveled |
+        | `pointsPerBlock` | 3 | Points per block broken |
+        | `pointsPerMob` | 15 | Points per mob killed |
+        | `pointsPerJump10` | 1 | Points per 10 jumps |
+        | `penaltyPerDeath` | 30 | Points deducted per death |
+
+    </TabItem>
+    <TabItem value="config" label="Config">
+
+        ```json
+        "mvp": {
+        "enabled": true,
+        "minScoreRequired": 10,
+        "pointsPerDistance100": 2,
+        "pointsPerBlock": 3,
+        "pointsPerMob": 15,
+        "pointsPerJump10": 1,
+        "penaltyPerDeath": 30,
+        "mvpWellRestedDurationMinutes": 21
+    }
+        ```
+
+    </TabItem>
+</Tabs>
+
+<Admonition type="info">
+    `minScoreRequired: 10` — the minimum number of points required to be an MVP. If no player reaches this threshold, there will be no MVP that night.
+</Admonition>
+
+The MVP receives a separate buff — as powerful as Well Rested level 5, but with a different duration (`mvpWellRestedDurationMinutes: 21`). By default this is longer than the standard level 5 duration.
+
+![MVP](/img/mvp.png)
+
+All parameters listed above are configurable and can be adjusted in the mod's config file.
+
+<Admonition type="tip">
+    MVP functionality can be completely disabled by setting `"enabled": false` in the config.
+</Admonition>

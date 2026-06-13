@@ -1,0 +1,47 @@
+import Admonition from '@theme/Admonition';
+
+# Custom facts
+
+## Configuration flags
+
+Two configuration flags are available:
+
+| Parameter | Default | Description |
+|---|---|---|
+| `useFactsApi` | `true` | Enables or disables the external API |
+| `userContentReplaces` | `false` | Whether user-defined facts completely replace the local database |
+
+---
+
+## Behavior overview
+
+During mod initialization, configuration directories are automatically created in the config folder.
+
+![Folders](/img/custom_facts.png)
+
+Custom facts can be added to these directories. By default, they are **appended** to the existing local database.
+
+If `userContentReplaces` is set to `true`, all local database facts are **fully replaced** with user-defined content.
+
+<Admonition type="warning">
+    If replacement is enabled (`userContentReplaces: true`), but no custom facts are provided in at least one category, that category will be automatically populated with entries from the local database.
+</Admonition>
+
+---
+
+## File format
+
+```json
+{
+  "entries": [
+    { "text": "Text example", "rarity": 1.0 }
+  ]
+}
+```
+
+| Field | Description |
+|---|---|
+| `text` | The fact content |
+| `rarity` | Defines how frequently the entry appears (rarity weight) |
+
+![Slide example](/img/custom_fact_example.png)

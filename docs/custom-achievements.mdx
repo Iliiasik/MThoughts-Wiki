@@ -1,0 +1,92 @@
+import Admonition from '@theme/Admonition';
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+# Custom achievements
+
+You can define your own custom achievements in the mod's config. Achievements with specified requirements for obtaining, a description, and an achievement name are added to the `achievements.json` file.
+
+---
+
+## Structure
+
+```json
+{
+  "achievements": [
+    {
+      "id": "test_achievment",
+      "name": "First Night",
+      "tooltip": "You survived the first night!",
+      "conditions": {
+        "deathsMax": 999
+      }
+    }
+  ]
+}
+```
+
+<Admonition type="info">
+    The `id` determines whether an achievement has already been earned. Multiple achievements can share the same id, but they will be counted as one — if a player has earned any achievement with that id, all others sharing it will also be marked as earned.
+</Admonition>
+
+---
+
+## Conditions
+
+| Parameter | Description |
+|---|---|
+| `deathsEq` / `deathsMin` / `deathsMax` | Number of deaths |
+| `mobsKilledEq` / `mobsKilledMin` / `mobsKilledMax` | Mobs killed |
+| `blocksDestroyedEq` / `blocksDestroyedMin` / `blocksDestroyedMax` | Blocks destroyed |
+| `distanceWalkedEq` / `distanceWalkedMin` / `distanceWalkedMax` | Distance walked |
+| `jumpsEq` / `jumpsMin` / `jumpsMax` | Number of jumps |
+| `damageDealtEq` / `damageDealtMin` / `damageDealtMax` | Damage dealt |
+
+- **Eq** — exactly the value required
+- **Min** — minimum value required
+- **Max** — maximum value allowed
+
+---
+
+## Example
+
+<Tabs>
+    <TabItem value="single" label="Single condition" default>
+
+        ```json
+        {
+            "achievements": [
+        {
+            "id": "test_achievment",
+            "name": "First Night",
+            "tooltip": "You survived the first night!",
+            "conditions": {
+            "deathsMax": 999
+        }
+        }
+            ]
+        }
+        ```
+
+    </TabItem>
+    <TabItem value="multi" label="Multiple conditions">
+
+        ```json
+        {
+            "achievements": [
+        {
+            "id": "test_achievment",
+            "name": "First Night",
+            "tooltip": "You survived the first night!",
+            "conditions": {
+            "deathsMax": 999,
+            "mobsKilledMin": 10,
+            "jumpsEq": 1
+        }
+        }
+            ]
+        }
+        ```
+
+    </TabItem>
+</Tabs>
