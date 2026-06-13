@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkmidnightthoughts_wiki=self.webpackChunkmidnightthoughts_wiki||[]).push([["517"],{6674(i){i.exports=JSON.parse('{"authors":[{"name":"Iliiasik","url":"https://github.com/Iliiasik","imageURL":"https://github.com/Iliiasik.png","key":"Iliiasik","page":null,"count":1}]}')}}]);

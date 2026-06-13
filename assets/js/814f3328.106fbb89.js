@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkmidnightthoughts_wiki=self.webpackChunkmidnightthoughts_wiki||[]).push([["833"],{5513(t){t.exports=JSON.parse('{"title":"Recent posts","items":[{"title":"Version 1.4.1","permalink":"/MThoughts-Wiki/blog/2026/06/11/version-1-4-1","unlisted":false,"date":"2026-06-11T00:00:00.000Z"}]}')}}]);

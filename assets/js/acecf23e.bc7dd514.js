@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkmidnightthoughts_wiki=self.webpackChunkmidnightthoughts_wiki||[]).push([["3220"],{1912(h){h.exports=JSON.parse('{"blogBasePath":"/MThoughts-Wiki/blog","blogTitle":"Blog","authorsListPath":"/MThoughts-Wiki/blog/authors"}')}}]);
