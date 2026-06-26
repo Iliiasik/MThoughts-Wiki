@@ -2,18 +2,38 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://Iliiasik.github.io/MThoughts-Wiki/blog</id>
     <title>Midnight Thoughts Wiki Blog</title>
-    <updated>2026-06-11T00:00:00.000Z</updated>
+    <updated>2026-06-26T00:00:00.000Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://Iliiasik.github.io/MThoughts-Wiki/blog"/>
     <subtitle>Midnight Thoughts Wiki Blog</subtitle>
     <icon>https://Iliiasik.github.io/MThoughts-Wiki/img/favicon.ico</icon>
     <entry>
+        <title type="html"><![CDATA[Version 1.4.2]]></title>
+        <id>https://Iliiasik.github.io/MThoughts-Wiki/blog/2026/06/26/version-1-4-2</id>
+        <link href="https://Iliiasik.github.io/MThoughts-Wiki/blog/2026/06/26/version-1-4-2"/>
+        <updated>2026-06-26T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[Network optimization has been improved, and commands have been added]]></summary>
+        <content type="html"><![CDATA[<p>Network optimization has been improved, and commands have been added</p>
+<!-- -->
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="network-optimization">Network optimization<a href="https://iliiasik.github.io/MThoughts-Wiki/blog/2026/06/26/version-1-4-2#network-optimization" class="hash-link" aria-label="Direct link to Network optimization" title="Direct link to Network optimization" translate="no">​</a></h3>
+<p>The transmission of the <code>WellRested</code> packet has been improved, slightly reducing network traffic</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="new-commands">New commands<a href="https://iliiasik.github.io/MThoughts-Wiki/blog/2026/06/26/version-1-4-2#new-commands" class="hash-link" aria-label="Direct link to New commands" title="Direct link to New commands" translate="no">​</a></h3>
+<p>Added support for the <code>/midnightthoughts reload</code> command,
+which performs a hot reload of the configuration without requiring a server restart</p>
+<div class="theme-admonition theme-admonition-warning admonition_xJq3 alert alert--warning"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 16 16"><path fill-rule="evenodd" d="M8.893 1.5c-.183-.31-.52-.5-.887-.5s-.703.19-.886.5L.138 13.499a.98.98 0 0 0 0 1.001c.193.31.53.501.886.501h13.964c.367 0 .704-.19.877-.5a1.03 1.03 0 0 0 .01-1.002L8.893 1.5zm.133 11.497H6.987v-2.003h2.039v2.003zm0-3.004H6.987V5.987h2.039v4.006z"></path></svg></span>warning</div><div class="admonitionContent_BuS1"><p>This applies only to the config. A full restart is required when modifying custom achievements or slides</p></div></div>]]></content>
+        <author>
+            <name>Iliiasik</name>
+            <uri>https://github.com/Iliiasik</uri>
+        </author>
+        <category label="update" term="update"/>
+    </entry>
+    <entry>
         <title type="html"><![CDATA[Version 1.4.1]]></title>
         <id>https://Iliiasik.github.io/MThoughts-Wiki/blog/2026/06/11/version-1-4-1</id>
         <link href="https://Iliiasik.github.io/MThoughts-Wiki/blog/2026/06/11/version-1-4-1"/>
         <updated>2026-06-11T00:00:00.000Z</updated>
-        <summary type="html"><![CDATA[New UI themes, full Spanish support, and server optimisation fixes.]]></summary>
-        <content type="html"><![CDATA[<p>New UI themes, full Spanish support, and server optimisation fixes.</p>
+        <summary type="html"><![CDATA[New UI themes, full Spanish support, and server optimization fixes.]]></summary>
+        <content type="html"><![CDATA[<p>New UI themes, full Spanish support, and server optimization fixes.</p>
 <!-- -->
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="new-ui">New UI<a href="https://iliiasik.github.io/MThoughts-Wiki/blog/2026/06/11/version-1-4-1#new-ui" class="hash-link" aria-label="Direct link to New UI" title="Direct link to New UI" translate="no">​</a></h3>
 <p>Reworked <strong>Vanilla</strong> and <strong>Classic</strong> themes, and added two brand new ones — <strong>Magic</strong> and <strong>Tech</strong>.</p>
