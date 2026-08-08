@@ -46,6 +46,18 @@ You can define your own custom achievements in the mod's config. Achievements wi
 - **Min** — minimum value required
 - **Max** — maximum value allowed
 
+All conditions in one achievement must be satisfied at the same time. Statistics are counted **since the player's last sleep**, not since the world was created — see [player statistics](./player-statistics).
+
+<Admonition type="tip">
+    After editing `achievements.json`, apply it without restarting:
+
+    ```
+    /midnightthoughts reload achievements
+    ```
+
+    The command reports how many achievements were loaded, which is the quickest way to catch a typo that made one of them invisible.
+</Admonition>
+
 ---
 
 ## Example

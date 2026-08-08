@@ -46,3 +46,81 @@ This setting controls how the **phantom rest timer** (`timeSinceLastRest`) is re
 
     </TabItem>
 </Tabs>
+
+---
+
+## Version matching
+
+The mod syncs config and content between server and client over its own network channel, and that channel carries a protocol version.
+
+<Admonition type="warning">
+    Client and server must run the **same mod version**. A mismatched client is rejected at connect time with a clear message rather than joining and misbehaving later.
+</Admonition>
+
+Install the same jar on the server and on every client and there is nothing else to configure.
+
+---
+
+## Server-authoritative settings
+
+When a player joins, the server sends its own config, and that copy is used for the session. Overlay timings, opacity, comfort weights and thresholds, the default theme and the HUD toggles are therefore identical for everyone, regardless of what each player has in their local file.
+
+<Admonition type="tip">
+    The one thing a player keeps is their personal summary theme, chosen with the gear button. Everything else follows the server.
+</Admonition>
+
+Changes take effect without a restart:
+
+```
+/midnightthoughts reload config
+```
+
+The file is re-read, validated, and pushed to everyone currently online. See [commands](./commands) for the full list.
+
+---
+
+## The sleeping players plate
+
+While anyone is asleep, a small plate in the corner shows how many players are sleeping out of how many are online — for example `Sleeping 2/5`. It updates as players get in and out of bed, and also when someone joins or leaves, so the denominator never goes stale.
+
+```json
+"ui": {
+  "hideSleepingPlayersHud": false
+}
+```
+
+Set it to `true` to hide the plate entirely. It is off by default, meaning the plate is shown.
+
+<Admonition type="note">
+    On a single-player world the plate is not particularly useful, but it is not hidden automatically — some players like the confirmation that the night is being skipped.
+</Admonition>
+
+---
+
+## Data safety
+
+Two things get written to disk regularly: the config and per-player statistics.
+
+Both are written **atomically** — the mod writes a temporary file and swaps it into place, so a crash or a power cut during a save leaves the previous version intact instead of a truncated file.
+
+Statistics are held in memory while the server runs and flushed when a player disconnects and on shutdown, rather than being re-read for every access.
+
+<Admonition type="tip">
+    If a stats or config file is ever damaged from the outside, the mod renames it with a `.broken` suffix, regenerates a clean one, and logs what it did. Nothing is silently deleted.
+</Admonition>
+
+---
+
+## Performance
+
+Comfort scans are the only meaningful per-player work, and results are cached per player, per position, for a short window — so walking around does not re-scan on every tick, and the scan only actually runs when a player interacts with a bed.
+
+<Admonition type="note">
+    In profiling on a live server, the mod accounts for a fraction of a percent of the server tick. Raising `scanRadius` to its maximum of 8 increases the scanned volume noticeably; if you run a large server and want to be careful, that is the one number worth watching.
+</Admonition>
+
+---
+
+## Extending behaviour
+
+Server owners who want custom rules — a dimension that is always uncomfortable, a reward when someone becomes MVP, a debuff after a nightmare — can script it with [KubeJS](./kubejs) without writing a mod, or hook the [Java API](./java-api) from an existing one.

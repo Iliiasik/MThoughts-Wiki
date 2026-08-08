@@ -1,0 +1,19 @@
+.cardTitleIcon {
+  font-size: 1.6rem;
+  margin-right: 0.6rem;
+}
+
+.cardTitleSvg {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  width: 1.6rem;
+  height: 1.6rem;
+  color: var(--ifm-color-primary);
+}
+
+.cardTitleSvg svg {
+  width: 100%;
+  height: 100%;
+}

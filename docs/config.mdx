@@ -1,28 +1,41 @@
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
 import Admonition from '@theme/Admonition';
 
 # Config
 
-The complete mod config looks like this:
+The config lives at `config/midnightthoughts.json` and is created on first launch.
+
+<Admonition type="info">
+    A full explanation of every parameter is on the matching page in the sidebar. This page is the complete reference — the file as a whole, plus the rules the mod applies when reading it.
+</Admonition>
+
+---
+
+## Full config
 
 ```json
 {
   "sleepOverlay": {
-    "minSlideDisplayTimeMs": 2500,
-    "maxSlideDisplayTimeMs": 4000,
+    "minSlideDisplayTimeMs": 6000,
+    "maxSlideDisplayTimeMs": 8000,
     "fadeInDurationMs": 300,
     "fadeOutDurationMs": 300,
     "overlayOpacity": 0.4,
     "textOpacity": 1.0,
     "imageOpacity": 0.6,
     "specialSlideChance": 0.05,
+    "enableStarDust": true,
+    "showSlideProgress": true,
     "enableOverlay": true,
     "enableImage": true,
     "enableDailySummaryScreen": true,
-    "useFactsApi": true,
+    "useFactsApi": false,
     "userContentReplaces": false,
     "hideChatWhenSleeping": true
   },
   "wellRested": {
+    "enabled": true,
     "levels": {
       "level5": {
         "durationMinutes": 15,
@@ -32,9 +45,6 @@ The complete mod config looks like this:
         "strengthPhase1": 0.24,
         "strengthPhase2": 0.16,
         "strengthPhase3": 0.08,
-        "hastePhase1": 0.35,
-        "hastePhase2": 0.2,
-        "hastePhase3": 0.1,
         "attackSpeedPhase1": 0.12,
         "attackSpeedPhase2": 0.06,
         "attackSpeedPhase3": 0.03,
@@ -49,9 +59,6 @@ The complete mod config looks like this:
         "strengthPhase1": 0.2,
         "strengthPhase2": 0.12,
         "strengthPhase3": 0.06,
-        "hastePhase1": 0.28,
-        "hastePhase2": 0.16,
-        "hastePhase3": 0.08,
         "attackSpeedPhase1": 0.1,
         "attackSpeedPhase2": 0.05,
         "attackSpeedPhase3": 0.02,
@@ -66,9 +73,6 @@ The complete mod config looks like this:
         "strengthPhase1": 0.16,
         "strengthPhase2": 0.08,
         "strengthPhase3": 0.04,
-        "hastePhase1": 0.22,
-        "hastePhase2": 0.12,
-        "hastePhase3": 0.06,
         "attackSpeedPhase1": 0.08,
         "attackSpeedPhase2": 0.04,
         "attackSpeedPhase3": 0.02,
@@ -83,9 +87,6 @@ The complete mod config looks like this:
         "strengthPhase1": 0.12,
         "strengthPhase2": 0.06,
         "strengthPhase3": 0.03,
-        "hastePhase1": 0.16,
-        "hastePhase2": 0.08,
-        "hastePhase3": 0.04,
         "attackSpeedPhase1": 0.06,
         "attackSpeedPhase2": 0.03,
         "attackSpeedPhase3": 0.01,
@@ -100,9 +101,6 @@ The complete mod config looks like this:
         "strengthPhase1": 0.08,
         "strengthPhase2": 0.04,
         "strengthPhase3": 0.02,
-        "hastePhase1": 0.1,
-        "hastePhase2": 0.05,
-        "hastePhase3": 0.02,
         "attackSpeedPhase1": 0.04,
         "attackSpeedPhase2": 0.02,
         "attackSpeedPhase3": 0.01,
@@ -123,7 +121,21 @@ The complete mod config looks like this:
   },
   "comfort": {
     "enabled": true,
-    "scanRadius": 5
+    "scanRadius": 5,
+    "weights": {
+      "lighting": 1,
+      "carpet": 1,
+      "furniture": 1,
+      "decoration": 1,
+      "structure": 1,
+      "macabre": -1,
+      "hostile": -1,
+      "dark": -1
+    },
+    "nightmareThreshold": -1,
+    "sleepBlockThreshold": -2,
+    "nightmareEnabled": true,
+    "sleepBlockEnabled": true
   },
   "server": {
     "resetPhantomTimerForNonSleepers": true
@@ -131,11 +143,127 @@ The complete mod config looks like this:
   "ui": {
     "theme": "classic",
     "hideWellRestedHud": false,
+    "hideSleepingPlayersHud": false,
     "hideThemeSwitchButton": false
   }
 }
 ```
 
-<Admonition type="info">
-    A full explanation of each parameter is located in the corresponding tab in the sidebar, including Custom Facts and Custom Achievements.
+<Admonition type="info" title="Loader differences">
+    Two keys exist only on some loaders and are not shown above:
+
+    `hastePhase1` / `hastePhase2` / `hastePhase3` inside each Well Rested level — mining speed bonuses. Minecraft has no such attribute before 1.21, so these are absent on 1.20.1.
+
+    `"wellRestedHudPosition"` inside `ui` — NeoForge only. See [Well Rested](./well-rested).
+</Admonition>
+
+---
+
+## Where each section is explained
+
+| Section | Explained on |
+|---|---|
+| `sleepOverlay` | [Sleep overlay](./sleep-overlay), plus [custom facts](./custom-facts) for `useFactsApi` and `userContentReplaces`, and [summary screen](./summary-screen) for `enableDailySummaryScreen` |
+| `wellRested` | [Well Rested](./well-rested) |
+| `mvp` | [Player statistics](./player-statistics) |
+| `comfort` | [Comfort system](./comfort-system) |
+| `server` | [For servers](./for-servers) |
+| `ui` | See the table below |
+
+### UI settings
+
+The `ui` section is spread across several features, so here it is in one place:
+
+| Parameter | Default | Description |
+|---|---|---|
+| `theme` | `"classic"` | Default summary screen theme for everyone on the server. One of `classic`, `vanilla`, `tech`, `magic` — see [summary screen](./summary-screen) |
+| `hideWellRestedHud` | `false` | Hides the Rested effect bar with its level and remaining time — see [Well Rested](./well-rested) |
+| `hideSleepingPlayersHud` | `false` | Hides the `Sleeping 2/5` plate shown while anyone on the server is asleep — see [for servers](./for-servers) |
+| `hideThemeSwitchButton` | `false` | Removes the gear button, so players cannot pick their own theme — see [summary screen](./summary-screen) |
+
+<Admonition type="note">
+    All four are `false` by default, which means everything is shown. Setting one to `true` hides that element for every player on the server.
+</Admonition>
+
+---
+
+## Where the values come from
+
+Most settings are **server-authoritative**. When you join a server, it sends its config to your client, and that copy wins over your local file for the session. This keeps overlay timings, opacity, comfort rules and the default theme consistent for everyone.
+
+<Admonition type="tip">
+    The exception is your personal theme. If you pick one with the gear button, it stays yours regardless of the server default — see [summary screen](./summary-screen).
+</Admonition>
+
+Changing the config on a live server does not require a restart:
+
+```
+/midnightthoughts reload config
+```
+
+The file is re-read, validated, and pushed to everyone online. Full command reference on the [commands](./commands) page.
+
+---
+
+## Validation
+
+The config is checked every time it is read. Values that make no sense are corrected rather than rejected, and each correction is written to the server log so you can see what happened.
+
+<Tabs>
+    <TabItem value="clamped" label="Clamping" default>
+
+        Out-of-range numbers are pulled back to the nearest valid value.
+
+        | Setting | Allowed range |
+        |---|---|
+        | `minSlideDisplayTimeMs`, `maxSlideDisplayTimeMs` | 500 – 120000 |
+        | `fadeInDurationMs`, `fadeOutDurationMs` | 0 – 10000 |
+        | `overlayOpacity`, `textOpacity`, `imageOpacity`, `specialSlideChance` | 0.0 – 1.0 |
+        | `durationMinutes`, `mvpWellRestedDurationMinutes` | 1 – 1440 |
+        | Speed / strength / attack speed phases | -5.0 – 5.0 |
+        | `healthBonus` | 0.0 – 200.0 |
+        | `regenBonus` | 0.0 – 1.0 |
+        | `scanRadius` | 0 – 8 |
+        | `nightmareThreshold`, `sleepBlockThreshold` | -100 – 100 |
+        | Comfort weights | -100 – 100 |
+        | MVP point values | 0 – 100000 |
+
+        If `maxSlideDisplayTimeMs` ends up below `minSlideDisplayTimeMs`, it is raised to match.
+
+    </TabItem>
+    <TabItem value="invalid" label="Invalid values">
+
+        `"theme"` only accepts `classic`, `vanilla`, `tech` or `magic`. Anything else resets to `classic`.
+
+        Numbers that are not numbers at all — `NaN`, `Infinity` — reset to their defaults instead of being clamped.
+
+        A missing Well Rested level is restored from defaults, so deleting `level3` from the file is a valid way to reset just that one.
+
+    </TabItem>
+    <TabItem value="missing" label="Missing keys">
+
+        Any key absent from the file is filled in with its default, and the file is rewritten so you can see and edit it. Values already present are preserved.
+
+        Deleting a key — or a whole section — is therefore a valid way to reset it.
+
+    </TabItem>
+    <TabItem value="broken" label="Broken files">
+
+        If the file cannot be parsed at all — a stray comma, a truncated write — the mod does **not** crash and does not silently overwrite your work. The damaged file is renamed to `midnightthoughts.json.broken` and a fresh default config is generated.
+
+        <Admonition type="tip">
+            Your original is still there under the `.broken` name. Fix the syntax error and rename it back.
+        </Admonition>
+
+    </TabItem>
+</Tabs>
+
+---
+
+## Safe writing
+
+The config and the statistics file are written atomically — the mod writes to a temporary file and then swaps it into place. A crash or a power cut in the middle of a save leaves the previous version intact instead of a half-written file.
+
+<Admonition type="note">
+    Statistics are also kept in memory while the server runs and flushed on player disconnect and on shutdown, rather than re-read from disk on every access.
 </Admonition>

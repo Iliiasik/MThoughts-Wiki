@@ -1,0 +1,102 @@
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+import Admonition from '@theme/Admonition';
+
+# Languages
+
+The mod ships with **13 languages**. Both the interface and the entire dream database are translated — sleeping in Japanese gives you Japanese facts, not English ones.
+
+<Admonition type="info" title="What gets translated">
+    Two separate things: the **interface** (`lang/*.json` — buttons, stat labels, achievement names) and the **dream database** (`dreams/<language>/*.json` — everything you read while sleeping).
+</Admonition>
+
+---
+
+## Supported languages
+
+| Language | Code | Facts API |
+|---|---|---|
+| English | `en_us` | ✅ |
+| German | `de_de` | ✅ |
+| Spanish | `es_es` | — |
+| Russian | `ru_ru` | — |
+| Chinese (Simplified) | `zh_cn` | — |
+| Portuguese (Brazil) | `pt_br` | — |
+| French | `fr_fr` | — |
+| Ukrainian | `uk_ua` | — |
+| Polish | `pl_pl` | — |
+| Japanese | `ja_jp` | — |
+| Korean | `ko_kr` | — |
+| Italian | `it_it` | — |
+| Turkish | `tr_tr` | — |
+
+The **Facts API** column refers to the external Useless Facts service, which only publishes English and German. Every other language runs entirely on the built-in database — which is not a downgrade, just a different source.
+
+---
+
+## Dream database
+
+Each language has the same five categories with the same number of entries, so no language is a second-class citizen:
+
+| Category | Entries per language | What it is |
+|---|---|---|
+| `facts` | 245 | Real-world style trivia |
+| `surreal` | 40 | Abstract, dream-like thoughts |
+| `lore` | 30 | In-universe lore and background |
+| `special` | 20 | Rare, higher-significance messages |
+| `nightmares` | 7 | Shown only during nightmares |
+| **Total** | **342** | |
+
+Across all 13 languages that is **4 446 entries**.
+
+<Admonition type="tip">
+    `nightmares` deliberately has few entries — a nightmare is a rare event, and a short, repeating set of lines reads as more unsettling than an endless stream of variety.
+</Admonition>
+
+---
+
+## How the language is chosen
+
+The mod follows the **client's** Minecraft language setting, not the server's. Two players on the same server see dreams in their own languages at the same time.
+
+<Tabs>
+    <TabItem value="exact" label="Exact match" default>
+
+        If your game language matches a supported code exactly — for example `ru_ru` — that language is used.
+
+    </TabItem>
+    <TabItem value="prefix" label="Prefix match">
+
+        If there is no exact match, the mod falls back to the language prefix. `pt_pt` (European Portuguese) resolves to `pt_br`, because both start with `pt`.
+
+    </TabItem>
+    <TabItem value="fallback" label="Fallback">
+
+        If neither matches — say you play in Icelandic — the mod falls back to `en_us`. Nothing breaks, you just get English dreams.
+
+    </TabItem>
+</Tabs>
+
+<Admonition type="note">
+    The fallback is also per-category. If a category somehow ends up empty in your language, only that category falls back to English; the rest stay translated.
+</Admonition>
+
+---
+
+## Custom content and languages
+
+Custom facts follow the same structure. The mod creates one folder per language in the config directory, so you can write your own dreams for any subset of languages you care about:
+
+```
+config/midnightthoughts/dreams/
+├── en_us/
+├── de_de/
+├── ru_ru/
+└── ... one folder per supported language
+```
+
+Full details are on the [custom facts](./custom-facts) page.
+
+<Admonition type="tip">
+    You do not have to fill in all 13. Players whose language has no custom entries simply see the built-in database.
+</Admonition>

@@ -1,0 +1,160 @@
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+import Admonition from '@theme/Admonition';
+
+# Commands
+
+All commands live under a single root: `/midnightthoughts`.
+
+<Admonition type="info" title="Permissions">
+    Every command requires **permission level 2** (game master / operator). In single player you need to have cheats enabled.
+</Admonition>
+
+<Admonition type="warning">
+    There is no `/mt` alias. The full `/midnightthoughts` name is the only one registered.
+</Admonition>
+
+---
+
+## Command tree
+
+```
+/midnightthoughts
+├── reload
+│   ├── config
+│   ├── achievements
+│   ├── content
+│   └── all
+├── comfort [target]
+└── wellrested
+    ├── grant <targets> <level>
+    └── clear <targets>
+```
+
+---
+
+## Reload
+
+Reloads mod data from disk without restarting the server.
+
+| Command | What it reloads |
+|---|---|
+| `/midnightthoughts reload config` | `midnightthoughts.json` — validated, then pushed to every online player |
+| `/midnightthoughts reload achievements` | `achievements.json` — reports how many were loaded |
+| `/midnightthoughts reload content` | Custom facts in `config/midnightthoughts/dreams/`, and recreates any missing default files |
+| `/midnightthoughts reload all` | All three at once |
+
+Running `/midnightthoughts reload` with no argument is the same as `reload all`.
+
+<Admonition type="tip">
+    Config reload also re-syncs the values to connected clients, so overlay timings, opacity and theme take effect immediately — no reconnect needed.
+</Admonition>
+
+<Admonition type="note">
+    A reloaded config goes through the same validation as a config loaded at startup. Out-of-range values are clamped and reported in the server log rather than rejected.
+</Admonition>
+
+---
+
+## Comfort
+
+```
+/midnightthoughts comfort [target]
+```
+
+Prints a full comfort report for a player: scan radius, which categories were found around the bed, the weight each one contributed, the resulting total, and whether that total triggers nightmares or blocks sleep entirely.
+
+<Tabs>
+    <TabItem value="self" label="Yourself" default>
+
+        ```
+        /midnightthoughts comfort
+        ```
+
+        Reports on the player running the command. Cannot be used from the console.
+
+    </TabItem>
+    <TabItem value="other" label="Another player">
+
+        ```
+        /midnightthoughts comfort Steve
+        ```
+
+        Reports on any online player. This form **also works from the server console and from command blocks**.
+
+    </TabItem>
+</Tabs>
+
+The report looks roughly like this:
+
+```
+── Comfort Report: Steve ──
+Scan radius: 5
+Cozy surroundings
+  ● Lighting     +1
+  ● Carpet       +1
+  ○ Furniture     —
+  ● Decoration   +1
+  ○ Structure     —
+Unsettling surroundings
+  ○ Macabre       —
+  ● Hostile      -1
+  ○ Dark          —
+Total comfort: +2
+Nightmares: no (threshold -1)
+Sleep blocked: no (threshold -2)
+```
+
+<Admonition type="tip">
+    This is the fastest way to answer "why can't I sleep here?". A filled circle means the category was found within the scan radius; the number next to it is the weight from the config.
+</Admonition>
+
+---
+
+## Well Rested
+
+Grants or removes the Rested effect manually.
+
+<Tabs>
+    <TabItem value="grant" label="Grant" default>
+
+        ```
+        /midnightthoughts wellrested grant <targets> <level>
+        ```
+
+        `level` accepts **1 to 5**. `targets` is a standard entity selector, so `@a`, `@p` and player names all work.
+
+        ```
+        /midnightthoughts wellrested grant @a 5
+        ```
+
+    </TabItem>
+    <TabItem value="clear" label="Clear">
+
+        ```
+        /midnightthoughts wellrested clear <targets>
+        ```
+
+        Removes the effect and fires the expiry event for anyone who actually had it.
+
+        ```
+        /midnightthoughts wellrested clear @a
+        ```
+
+    </TabItem>
+</Tabs>
+
+<Admonition type="warning">
+    If the Well Rested system is switched off in the config (`"wellRested": { "enabled": false }`), `grant` refuses to run and tells you so instead of silently doing nothing.
+</Admonition>
+
+---
+
+## Automation
+
+Because every command is a normal Brigadier command, they can be used from command blocks, datapack functions and server consoles — with the single exception of `comfort` without a target, which needs a player to report on.
+
+```mcfunction
+# Reward the whole server after a boss fight
+midnightthoughts wellrested grant @a 5
+```

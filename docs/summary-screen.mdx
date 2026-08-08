@@ -67,3 +67,19 @@ If a player changes their theme, that theme will be displayed regardless of the 
 <Admonition type="tip">
     Setting `hideThemeSwitchButton: true` removes the gear button from the summary screen, preventing players from changing their personal theme.
 </Admonition>
+
+<Admonition type="note">
+    An invalid theme name in the config is not an error — it resets to `classic` and the correction is written to the server log. The same applies to a player's personal choice.
+</Admonition>
+
+---
+
+## Who sees it
+
+The summary is shown to players who **actually slept** that night.
+
+If a player got out of bed on their own before morning and never went back, they do not get a summary — the night was skipped by others, not by them. A player who tried to sleep and was refused because of low [comfort](./comfort-system) also does not count as having gone back to bed.
+
+<Admonition type="tip">
+    This ties into the vanilla `playerSleepingPercentage` gamerule. Details on the [for servers](./for-servers) page.
+</Admonition>

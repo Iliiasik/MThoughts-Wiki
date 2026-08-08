@@ -11,3 +11,27 @@ import Admonition from '@theme/Admonition';
 </Admonition>
 
 If a mod has the ability to **disable** the night-to-day skip mechanic, such as the **Better Days** mod, then Midnight Thoughts will work completely with it.
+
+---
+
+## KubeJS
+
+<Admonition type="tip">
+    KubeJS is supported as an **optional** dependency. If it is present, the mod registers a binding and five events; if it is absent, nothing changes and nothing is logged. See [KubeJS](./kubejs).
+</Admonition>
+
+---
+
+## Other mods
+
+Because the comfort system is built on **block tags**, blocks from other mods can be made to count towards comfort with a small data pack — no compatibility patch needed on either side. The [comfort system](./comfort-system) page shows the format.
+
+Mods that want deeper integration can listen to the [Java API](./java-api) events, including overriding the comfort result entirely.
+
+---
+
+## Client and server
+
+<Admonition type="warning">
+    The mod must be installed on **both** the client and the server, in the **same version**. It is not a client-side or server-side only mod — the overlay and summary live on the client, while comfort, statistics and effects live on the server.
+</Admonition>

@@ -8,21 +8,45 @@ The mod introduces a **comfort system** that affects sleep quality.
 When a player goes to bed, their **rest level** after waking depends on the **comfort level around the bed**.
 
 
-The comfort scan radius around the bed is defined in the configuration file:
+Comfort is influenced by nearby elements such as furniture, plants in pots, glass, carpets, and lanterns.
+Some blocks **increase comfort**, while others **decrease it**.
+
+The whole system is configured in one block:
 
 ```json
 "comfort": {
-"enabled": true,
-"scanRadius": 5
-},
+  "enabled": true,
+  "scanRadius": 5,
+  "weights": {
+    "lighting": 1,
+    "carpet": 1,
+    "furniture": 1,
+    "decoration": 1,
+    "structure": 1,
+    "macabre": -1,
+    "hostile": -1,
+    "dark": -1
+  },
+  "nightmareThreshold": -1,
+  "sleepBlockThreshold": -2,
+  "nightmareEnabled": true,
+  "sleepBlockEnabled": true
+}
 ```
 
-Where 5 is the number of blocks.
+| Parameter | Default | Description |
+|---|---|---|
+| `enabled` | `true` | Set to `false` to switch the comfort system off entirely |
+| `scanRadius` | `5` | How many blocks around the bed are scanned, 0–8 |
+| `weights` | see below | How much each category contributes |
+| `nightmareThreshold` | `-1` | Comfort at or below this triggers nightmares |
+| `sleepBlockThreshold` | `-2` | Comfort at or below this prevents sleep entirely |
+| `nightmareEnabled` | `true` | Set to `false` to never trigger nightmares |
+| `sleepBlockEnabled` | `true` | Set to `false` to always allow sleeping, however grim the room |
 
-You can also completely disable the comfort system.
-
-Comfort is influenced by nearby elements such as furniture, plants in pots, glass, carpets, and lanterns.
-Some blocks **increase comfort**, while others **decrease it**.
+<Admonition type="tip">
+    A bigger `scanRadius` means a larger area is checked, which makes high comfort easier to reach — a lantern three rooms away still counts. Lowering it to 2 or 3 forces players to build a genuinely cosy bedroom rather than a cosy house.
+</Admonition>
 
 ---
 
@@ -51,35 +75,69 @@ Setting `"replace": false` ensures that new blocks are **added without overridin
 
 ---
 
-## Positive comfort tags
+## How comfort is scored
 
-These tags **increase comfort** and contribute to the **Well Rested** level:
+Each category is checked **once**. Either at least one matching block was found within the scan radius, or none was — a room with twenty lanterns scores exactly the same as a room with one.
 
-| Tag | Effect |
-|---|---|
-| `comfort_lighting` | +1 level |
-| `comfort_carpet` | +1 level |
-| `comfort_furniture` | +1 level |
-| `comfort_decoration` | +1 level |
-| `comfort_structure` | +1 level |
+Every category that was found adds its weight from the config. The sum is the comfort level.
 
-Each category contributes **+1 level** to the effect (up to 5 levels total).
+| Tag | Config weight | Default |
+|---|---|---|
+| `comfort_lighting` | `weights.lighting` | +1 |
+| `comfort_carpet` | `weights.carpet` | +1 |
+| `comfort_furniture` | `weights.furniture` | +1 |
+| `comfort_decoration` | `weights.decoration` | +1 |
+| `comfort_structure` | `weights.structure` | +1 |
+| `comfort_negative_macabre` | `weights.macabre` | -1 |
+| `comfort_negative_hostile` | `weights.hostile` | -1 |
+| `comfort_negative_dark` | `weights.dark` | -1 |
+
+With the default weights that gives a range from **-3** to **+5**. The positive result becomes the [Well Rested](./well-rested) level, so all five positive categories present means level 5.
+
+<Admonition type="tip" title="Designing your own balance">
+    Weights are the main balancing lever. Making `structure` worth 2 rewards enclosed bedrooms; making `dark` worth -3 turns an unlit room into an automatic nightmare no matter what furniture is in it. Any weight can be negative or positive, from -100 to 100.
+</Admonition>
 
 ---
 
-## Negative comfort tags
+## Nightmares and blocked sleep
 
-These tags **reduce comfort** around the bed:
+Two thresholds are checked against the final comfort level:
 
-| Tag | Effect |
+| Condition | Result |
 |---|---|
-| `comfort_negative_dark` | Reduces comfort |
-| `comfort_negative_hostile` | Reduces comfort |
-| `comfort_negative_macabre` | Reduces comfort |
+| comfort ≤ `sleepBlockThreshold` | The player **cannot sleep at all** and is told why |
+| comfort ≤ `nightmareThreshold` | The player sleeps, but gets a **nightmare** |
+| otherwise | A normal night |
+
+With the defaults (`-1` and `-2`) that works out as:
+
+| Comfort | Outcome |
+|---|---|
+| +1 and above | Normal sleep, Rested effect at that level |
+| 0 | Normal sleep, no Rested effect |
+| -1 | Nightmare |
+| -2 and below | Cannot sleep |
 
 <Admonition type="warning">
-    Too many negative blocks may lower the final Rested level or cause nightmares.
+    The sleep block is checked first. If comfort is low enough to hit both thresholds, the player simply cannot go to bed — there is no nightmare, because there is no sleep.
 </Admonition>
+
+<Admonition type="note">
+    Both behaviours can be turned off independently. `"nightmareEnabled": false` keeps the comfort scoring but never shows nightmares; `"sleepBlockEnabled": false` lets players sleep anywhere while still getting nightmares in bad places.
+</Admonition>
+
+---
+
+## Checking comfort in-game
+
+Rather than guessing which category is missing, ask the mod:
+
+```
+/midnightthoughts comfort
+```
+
+It prints every category, whether it was found, the weight it contributed, the total, and how that total compares to both thresholds. Operators can also check another player with `/midnightthoughts comfort <name>`. See [commands](./commands).
 
 ---
 

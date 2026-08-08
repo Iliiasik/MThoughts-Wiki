@@ -1,0 +1,180 @@
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+import Admonition from '@theme/Admonition';
+
+# KubeJS
+
+If [KubeJS](https://www.curseforge.com/minecraft/mc-mods/kubejs) is installed, Midnight Thoughts exposes a binding and five events, so you can react to sleep, hand out the Rested effect, and even override how comfortable a bedroom is — all from a script, with no Java and no recompiling.
+
+<Admonition type="info" title="Optional dependency">
+    KubeJS is entirely optional. The mod detects it at load time; without it nothing changes and no errors are printed.
+</Admonition>
+
+<Admonition type="note">
+    All five events are **server** events, so scripts belong in `kubejs/server_scripts/`. They will not fire from `startup_scripts` or `client_scripts`.
+</Admonition>
+
+---
+
+## Bindings
+
+The global object is called `MidnightThoughts`.
+
+| Method | Returns | Description |
+|---|---|---|
+| `grantWellRested(player, level)` | — | Applies the Rested effect at level 1–5 |
+| `grantMvp(player)` | — | Applies the MVP variant of the effect |
+| `clearWellRested(player)` | — | Removes the effect |
+| `hasWellRested(player)` | `boolean` | Whether the effect is currently active |
+| `getLevel(player)` | `int` | Current effect level, `0` if inactive |
+| `getComfort(player)` | `int` | Comfort level around the player right now |
+
+```js
+ItemEvents.rightClicked('minecraft:clock', event => {
+    const player = event.player
+    player.tell('Comfort here: ' + MidnightThoughts.getComfort(player))
+    player.tell('Rested level: ' + MidnightThoughts.getLevel(player))
+})
+```
+
+<Admonition type="note">
+    `getComfort` returns the same comfort level the rest of the mod acts on — the one compared against `nightmareThreshold` and `sleepBlockThreshold`. See the [comfort system](./comfort-system).
+</Admonition>
+
+---
+
+## Events
+
+All events are registered under the `MidnightThoughtsEvents` group.
+
+| Event | Fires when |
+|---|---|
+| `wellRestedApplied` | The Rested effect is granted |
+| `wellRestedExpired` | The Rested effect is removed |
+| `nightmare` | A player falls asleep in nightmare conditions |
+| `mvpDetermined` | The night's MVP is chosen |
+| `comfortCalculated` | Comfort is calculated for a player |
+
+<Tabs>
+    <TabItem value="applied" label="wellRestedApplied" default>
+
+        | Getter | Type | Description |
+        |---|---|---|
+        | `getPlayer()` | `ServerPlayer` | Who received the effect |
+        | `getLevel()` | `int` | Effect level, 1–5 |
+        | `isMvp()` | `boolean` | Whether this is the MVP variant |
+        | `getDurationTicks()` | `int` | Total duration in ticks |
+
+        ```js
+        MidnightThoughtsEvents.wellRestedApplied(event => {
+            const minutes = Math.round(event.getDurationTicks() / 20 / 60)
+            event.getPlayer().tell('Rested ' + event.getLevel() + ' for ' + minutes + ' min')
+        })
+        ```
+
+        Fires after waking up, from the `wellrested grant` command, and from the `grantWellRested` binding.
+
+    </TabItem>
+    <TabItem value="expired" label="wellRestedExpired">
+
+        | Getter | Type | Description |
+        |---|---|---|
+        | `getPlayer()` | `ServerPlayer` | Who lost the effect |
+
+        ```js
+        MidnightThoughtsEvents.wellRestedExpired(event => {
+            event.getPlayer().tell('You feel tired again.')
+        })
+        ```
+
+        Fires when the timer runs out, when the player dies, and from `clear`. It does **not** fire if the player had no effect to begin with.
+
+    </TabItem>
+    <TabItem value="nightmare" label="nightmare">
+
+        | Getter | Type | Description |
+        |---|---|---|
+        | `getPlayer()` | `ServerPlayer` | Who is having the nightmare |
+        | `getComfortLevel()` | `int` | The comfort level that caused it |
+
+        ```js
+        MidnightThoughtsEvents.nightmare(event => {
+            event.getPlayer().potionEffects.add('minecraft:nausea', 200, 0)
+        })
+        ```
+
+        <Admonition type="note">
+            Fires only when the player actually falls asleep. If comfort is low enough that sleep is blocked outright, there is no nightmare and no event.
+        </Admonition>
+
+    </TabItem>
+    <TabItem value="mvp" label="mvpDetermined">
+
+        | Getter | Type | Description |
+        |---|---|---|
+        | `getMvp()` | `ServerPlayer` | The winning player |
+
+        ```js
+        MidnightThoughtsEvents.mvpDetermined(event => {
+            event.server.tell('MVP of the night: ' + event.getMvp().username)
+        })
+        ```
+
+        Fires in the morning, together with the summary screen, and only if someone cleared `minScoreRequired`.
+
+    </TabItem>
+    <TabItem value="comfort" label="comfortCalculated">
+
+        | Member | Type | Description |
+        |---|---|---|
+        | `getPlayer()` | `ServerPlayer` | Whose surroundings were scanned |
+        | `getLevel()` | `int` | The calculated comfort level |
+        | `setLevel(int)` | — | **Overrides** the result |
+
+        ```js
+        // A bed in the Nether is never comfortable
+        MidnightThoughtsEvents.comfortCalculated(event => {
+            if (event.getPlayer().level.dimension == 'minecraft:the_nether') {
+                event.setLevel(-5)
+            }
+        })
+        ```
+
+    </TabItem>
+</Tabs>
+
+---
+
+## Overriding comfort
+
+`comfortCalculated` is the only event with a setter, and it is the most powerful hook the mod offers. The value you set is what the rest of the mod uses — it decides the Rested level, whether nightmares trigger, and whether sleep is blocked at all.
+
+That makes it enough to build entire custom rules on top of the block-scanning system:
+
+```js
+// Sleeping outdoors is always miserable, no matter how nice the furniture is
+MidnightThoughtsEvents.comfortCalculated(event => {
+    const player = event.getPlayer()
+    if (player.level.canSeeSky(player.blockPosition())) {
+        event.setLevel(Math.min(event.getLevel(), 0))
+    }
+})
+```
+
+<Admonition type="tip">
+    Comfort results are cached per player for a short time and per position, so this event does not fire every tick. You can do moderately expensive work in it without hurting server performance.
+</Admonition>
+
+<Admonition type="warning">
+    Because `setLevel` overrides everything, a script that unconditionally sets a high value effectively disables the comfort system. That is a valid thing to want — just be aware it is what you are doing.
+</Admonition>
+
+---
+
+## Availability
+
+<Admonition type="info">
+    KubeJS integration is present on the loaders and Minecraft versions where a matching KubeJS build exists. If you load the mod on a version where KubeJS is unavailable, the integration simply does not register — everything else works as normal.
+</Admonition>
+
+Java mod developers who want the same hooks without KubeJS should use the [Java API](./java-api) instead.

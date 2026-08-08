@@ -8,49 +8,97 @@ const sidebars: SidebarsConfig = {
       label: 'Overview',
     },
     {
-      type: 'doc',
-      id: 'comfort-system',
-      label: 'Comfort system',
+      type: 'category',
+      label: 'Gameplay',
+      collapsed: false,
+      items: [
+        {
+          type: 'doc',
+          id: 'comfort-system',
+          label: 'Comfort system',
+        },
+        {
+          type: 'doc',
+          id: 'well-rested',
+          label: 'Well Rested',
+        },
+        {
+          type: 'doc',
+          id: 'sleep-overlay',
+          label: 'Sleep overlay',
+        },
+        {
+          type: 'doc',
+          id: 'player-statistics',
+          label: 'Player statistics',
+        },
+        {
+          type: 'doc',
+          id: 'summary-screen',
+          label: 'Summary screen',
+        },
+      ],
     },
     {
-      type: 'doc',
-      id: 'well-rested',
-      label: 'Well Rested',
+      type: 'category',
+      label: 'Customization',
+      collapsed: false,
+      items: [
+        {
+          type: 'doc',
+          id: 'custom-facts',
+          label: 'Custom facts',
+        },
+        {
+          type: 'doc',
+          id: 'custom-achievements',
+          label: 'Custom achievements',
+        },
+        {
+          type: 'doc',
+          id: 'languages',
+          label: 'Languages',
+        },
+      ],
     },
     {
-      type: 'doc',
-      id: 'sleep-overlay',
-      label: 'Sleep overlay',
+      type: 'category',
+      label: 'Administration',
+      collapsed: false,
+      items: [
+        {
+          type: 'doc',
+          id: 'commands',
+          label: 'Commands',
+        },
+        {
+          type: 'doc',
+          id: 'config',
+          label: 'Config',
+        },
+        {
+          type: 'doc',
+          id: 'for-servers',
+          label: 'For servers',
+        },
+      ],
     },
     {
-      type: 'doc',
-      id: 'player-statistics',
-      label: 'Player statistics',
-    },
-    {
-      type: 'doc',
-      id: 'summary-screen',
-      label: 'Summary screen',
-    },
-    {
-      type: 'doc',
-      id: 'custom-facts',
-      label: 'Custom facts',
-    },
-    {
-      type: 'doc',
-      id: 'custom-achievements',
-      label: 'Custom achievements',
-    },
-    {
-      type: 'doc',
-      id: 'for-servers',
-      label: 'For servers',
-    },
-    {
-      type: 'doc',
-      id: 'config',
-      label: 'Config',
+      type: 'category',
+      label: 'Developers',
+      collapsed: false,
+      items: [
+        {
+          type: 'doc',
+          id: 'kubejs',
+          label: 'KubeJS',
+        },
+        {
+          type: 'doc',
+          id: 'java-api',
+          label: 'Java API',
+        },
+      ],
     },
     {
       type: 'doc',

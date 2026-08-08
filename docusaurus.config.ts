@@ -33,16 +33,7 @@ const config: Config = {
           sidebarPath: './sidebars.ts',
           routeBasePath: '/',
         },
-        blog: {
-          showReadingTime: true,
-          feedOptions: {
-            type: ['rss', 'atom'],
-            xslt: true,
-          },
-          onInlineTags: 'warn',
-          onInlineAuthors: 'warn',
-          onUntruncatedBlogPosts: 'warn',
-        },
+        blog: false,
         theme: {
           customCss: './src/css/custom.css',
         },
@@ -62,11 +53,6 @@ const config: Config = {
       },
       title: 'Wiki',
       items: [
-        {
-          to: '/blog',
-          label: 'Updates',
-          position: 'left',
-        },
         {
           href: 'https://github.com/Iliiasik/MThoughts',
           label: 'GitHub',

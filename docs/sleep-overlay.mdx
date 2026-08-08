@@ -17,7 +17,9 @@ The moon displays the current phase of the Minecraft world.
 ![Moon phases](/img/moon_phases.gif)
 
 
-To trigger nightmares, the sleeping comfort must be less than 0. If it's greater than -1, the player won't be able to sleep at all. More information about comfort is available in the [comfort system](./comfort-system) tab.
+A nightmare happens when the comfort around the bed drops to `nightmareThreshold` (**-1** by default) or lower. Drop further, to `sleepBlockThreshold` (**-2** by default), and the player cannot go to bed at all. Both numbers are configurable — see the [comfort system](./comfort-system) tab.
+
+Instead of the calm starfield of a normal night, a nightmare replaces the background with a dark red vignette that slowly closes in and opens back up, like laboured breathing. It is not a flashing effect — the movement is deliberately slow.
 
 The overlay is fully customizable.
 
@@ -30,8 +32,8 @@ The overlay is fully customizable.
 
         | Parameter | Default | Description |
         |---|---|---|
-        | `minSlideDisplayTimeMs` | 2500 | Minimum slide duration in milliseconds |
-        | `maxSlideDisplayTimeMs` | 4000 | Maximum slide duration in milliseconds |
+        | `minSlideDisplayTimeMs` | 6000 | Minimum slide duration in milliseconds |
+        | `maxSlideDisplayTimeMs` | 8000 | Maximum slide duration in milliseconds |
         | `fadeInDurationMs` | 300 | How quickly a new slide appears |
         | `fadeOutDurationMs` | 300 | How quickly a slide disappears |
 
@@ -47,6 +49,12 @@ The overlay is fully customizable.
         | `imageOpacity` | 0.6 | Transparency of images, where 1 = 100% |
         | `specialSlideChance` | 0.05 | Percentage chance of a special slide appearing |
         | `enableImage` | true | Enables or disables the overlay image (moon or skull) |
+        | `enableStarDust` | true | The drifting starfield behind the text on a normal night |
+        | `showSlideProgress` | true | A thin progress indicator showing how long the current slide has left |
+
+        <Admonition type="note">
+            `enableStarDust` only affects normal sleep. Nightmares always use the red vignette instead of stars, so turning stars off does not make nightmares plain.
+        </Admonition>
 
     </TabItem>
     <TabItem value="behavior" label="Behavior">
@@ -70,24 +78,28 @@ While sleeping, players receive different types of messages, including:
 - **Surreal thoughts** — abstract, dream-like messages
 - **Special messages** — rare and unique events with higher significance
 
+Nightmares draw from their own separate pool, so the unsettling lines never show up on a peaceful night.
+
 ### Supported languages
 
-<Tabs>
-    <TabItem value="en" label="English" default>
+The mod ships with **13 fully translated languages**, each with the same 342 dream entries. The overlay follows your own client language, so players on the same server read dreams in different languages simultaneously.
 
-        Useless Facts API + local database (~500 entries).
+The full table, entry counts and fallback rules are on the [languages](./languages) page.
 
-    </TabItem>
-    <TabItem value="de" label="German">
+<Admonition type="info">
+    The external Useless Facts API only exists for English and German. Every other language runs on the built-in database — which is the default anyway, see below.
+</Admonition>
 
-        Useless Facts API + local database (~500 entries).
+### The facts API
 
-    </TabItem>
-    <TabItem value="es" label="Spanish">
+```json
+"useFactsApi": false
+```
 
-        Local database only (~500 entries). API is not available for this language.
+When enabled, English and German players get an extra stream of trivia pulled from an online service, mixed in with the built-in entries.
 
-    </TabItem>
-</Tabs>
+<Admonition type="warning">
+    This is **off by default**. It reaches out to the internet, which is not something a Minecraft server should do without being asked, and the built-in database is large enough to stand on its own.
+</Admonition>
 
-For all languages there is a local fact database of approximately 500 entries, which is activated if the API is unavailable, there is no internet connection, or other factors, including a disabled function in the configuration.
+If you enable it and the service is unreachable — no connection, downtime, a firewall — the mod quietly falls back to the local database and retries later instead of hammering the endpoint. Players never see an error; they just see local facts.
