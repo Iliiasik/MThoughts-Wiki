@@ -26,19 +26,61 @@ Each level progresses through **three phases**, gradually weakening over time:
 
 If a player goes to bed with the Well Rested buff, they will only receive a new buff upon waking if it is stronger than the buff they already have. For example, if a player currently has Well Rested at level 4, sleeping in a location that only provides Well Rested at level 1 will keep their level 4 buff. However, if the current buff is stronger but is about to expire, the player will receive a new one, even if it is weaker.
 
-![Well Rested](/img/well_rested.png)
+---
 
+## HUD
 
-You can completely disable the HUD display using the following config parameter:
-`"hideWellRestedHud": false`
+While the effect is active, a small bar shows the remaining time, and a numeral shows the level. The whole HUD fades in and out during the last ten seconds, so you can tell the effect is about to run out without watching the bar.
 
-<Admonition type="info">
-    The HUD's position above the hunger bar is unique to NeoForge; in other versions, the HUD is in the lower left corner. NeoForge has a unique config parameter:
-    `"wellRestedHudPosition": "primary"`
-    This changes the position of the well-rested hud. `primary` is above the hunger bar, `secondary` is in the lower left corner.
+You can hide it completely:
+
+```json
+"ui": {
+  "hideWellRestedHud": true
+}
+```
+
+The HUD has three positions, chosen with `wellRestedHudPosition` inside `ui`:
+
+<Tabs>
+    <TabItem value="left" label="left" default>
+
+        Bottom left corner. This is the default.
+
+        ```json
+        "wellRestedHudPosition": "left"
+        ```
+
+        ![Well Rested in the bottom left corner](/img/well_rested_left.png)
+
+    </TabItem>
+    <TabItem value="bar" label="bar">
+
+        Above the hunger bar, aligned with the right edge of the vanilla bars. Air bubbles move up to make room.
+
+        ```json
+        "wellRestedHudPosition": "bar"
+        ```
+
+        ![Well Rested above the hunger bar](/img/well_rested_bar.png)
+
+    </TabItem>
+    <TabItem value="right" label="right">
+
+        Bottom right corner.
+
+        ```json
+        "wellRestedHudPosition": "right"
+        ```
+
+        ![Well Rested in the bottom right corner](/img/well_rested_right.png)
+
+    </TabItem>
+</Tabs>
+
+<Admonition type="note">
+    An unknown value falls back to `left`, and the corrected value is written back to the config file.
 </Admonition>
-
-![Well Rested Left](/img/well_rested_left.png)
 
 
 ---
@@ -63,20 +105,20 @@ In the config, the following fields are responsible for the strength of the effe
         ```json
         "level5": {
         "durationMinutes": 15,
-        "speedPhase1": 0.5,
-        "speedPhase2": 0.3,
-        "speedPhase3": 0.16,
-        "strengthPhase1": 0.24,
-        "strengthPhase2": 0.16,
-        "strengthPhase3": 0.08,
-        "hastePhase1": 0.35,
-        "hastePhase2": 0.2,
-        "hastePhase3": 0.1,
-        "attackSpeedPhase1": 0.12,
-        "attackSpeedPhase2": 0.06,
-        "attackSpeedPhase3": 0.03,
+        "speedPhase1": 0.25,
+        "speedPhase2": 0.15,
+        "speedPhase3": 0.08,
+        "strengthPhase1": 1.5,
+        "strengthPhase2": 1.0,
+        "strengthPhase3": 0.5,
+        "hastePhase1": 0.25,
+        "hastePhase2": 0.14,
+        "hastePhase3": 0.07,
+        "attackSpeedPhase1": 0.07,
+        "attackSpeedPhase2": 0.04,
+        "attackSpeedPhase3": 0.02,
         "healthBonus": 10.0,
-        "regenBonus": 0.1
+        "regenBonus": 0.05
     }
         ```
 
@@ -86,20 +128,20 @@ In the config, the following fields are responsible for the strength of the effe
         ```json
         "level4": {
         "durationMinutes": 10,
-        "speedPhase1": 0.4,
-        "speedPhase2": 0.24,
-        "speedPhase3": 0.12,
-        "strengthPhase1": 0.2,
-        "strengthPhase2": 0.12,
-        "strengthPhase3": 0.06,
-        "hastePhase1": 0.28,
-        "hastePhase2": 0.16,
-        "hastePhase3": 0.08,
-        "attackSpeedPhase1": 0.1,
-        "attackSpeedPhase2": 0.05,
+        "speedPhase1": 0.2,
+        "speedPhase2": 0.12,
+        "speedPhase3": 0.06,
+        "strengthPhase1": 1.0,
+        "strengthPhase2": 0.75,
+        "strengthPhase3": 0.5,
+        "hastePhase1": 0.2,
+        "hastePhase2": 0.11,
+        "hastePhase3": 0.06,
+        "attackSpeedPhase1": 0.06,
+        "attackSpeedPhase2": 0.03,
         "attackSpeedPhase3": 0.02,
         "healthBonus": 8.0,
-        "regenBonus": 0.08
+        "regenBonus": 0.04
     }
         ```
 
@@ -109,20 +151,20 @@ In the config, the following fields are responsible for the strength of the effe
         ```json
         "level3": {
         "durationMinutes": 7,
-        "speedPhase1": 0.32,
-        "speedPhase2": 0.18,
-        "speedPhase3": 0.08,
-        "strengthPhase1": 0.16,
-        "strengthPhase2": 0.08,
-        "strengthPhase3": 0.04,
-        "hastePhase1": 0.22,
-        "hastePhase2": 0.12,
-        "hastePhase3": 0.06,
-        "attackSpeedPhase1": 0.08,
-        "attackSpeedPhase2": 0.04,
-        "attackSpeedPhase3": 0.02,
+        "speedPhase1": 0.16,
+        "speedPhase2": 0.09,
+        "speedPhase3": 0.04,
+        "strengthPhase1": 0.75,
+        "strengthPhase2": 0.5,
+        "strengthPhase3": 0.25,
+        "hastePhase1": 0.15,
+        "hastePhase2": 0.08,
+        "hastePhase3": 0.04,
+        "attackSpeedPhase1": 0.05,
+        "attackSpeedPhase2": 0.03,
+        "attackSpeedPhase3": 0.01,
         "healthBonus": 6.0,
-        "regenBonus": 0.06
+        "regenBonus": 0.03
     }
         ```
 
@@ -132,20 +174,20 @@ In the config, the following fields are responsible for the strength of the effe
         ```json
         "level2": {
         "durationMinutes": 5,
-        "speedPhase1": 0.24,
-        "speedPhase2": 0.12,
-        "speedPhase3": 0.06,
-        "strengthPhase1": 0.12,
-        "strengthPhase2": 0.06,
-        "strengthPhase3": 0.03,
-        "hastePhase1": 0.16,
-        "hastePhase2": 0.08,
-        "hastePhase3": 0.04,
-        "attackSpeedPhase1": 0.06,
-        "attackSpeedPhase2": 0.03,
+        "speedPhase1": 0.12,
+        "speedPhase2": 0.06,
+        "speedPhase3": 0.03,
+        "strengthPhase1": 0.5,
+        "strengthPhase2": 0.25,
+        "strengthPhase3": 0.25,
+        "hastePhase1": 0.11,
+        "hastePhase2": 0.06,
+        "hastePhase3": 0.03,
+        "attackSpeedPhase1": 0.04,
+        "attackSpeedPhase2": 0.02,
         "attackSpeedPhase3": 0.01,
         "healthBonus": 4.0,
-        "regenBonus": 0.04
+        "regenBonus": 0.02
     }
         ```
 
@@ -155,20 +197,20 @@ In the config, the following fields are responsible for the strength of the effe
         ```json
         "level1": {
         "durationMinutes": 3,
-        "speedPhase1": 0.16,
-        "speedPhase2": 0.08,
-        "speedPhase3": 0.04,
-        "strengthPhase1": 0.08,
-        "strengthPhase2": 0.04,
-        "strengthPhase3": 0.02,
-        "hastePhase1": 0.1,
-        "hastePhase2": 0.05,
+        "speedPhase1": 0.08,
+        "speedPhase2": 0.04,
+        "speedPhase3": 0.02,
+        "strengthPhase1": 0.25,
+        "strengthPhase2": 0.25,
+        "strengthPhase3": 0.25,
+        "hastePhase1": 0.07,
+        "hastePhase2": 0.04,
         "hastePhase3": 0.02,
-        "attackSpeedPhase1": 0.04,
-        "attackSpeedPhase2": 0.02,
+        "attackSpeedPhase1": 0.02,
+        "attackSpeedPhase2": 0.01,
         "attackSpeedPhase3": 0.01,
         "healthBonus": 2.0,
-        "regenBonus": 0.02
+        "regenBonus": 0.01
     }
         ```
 
@@ -181,7 +223,11 @@ In the config, the following fields are responsible for the strength of the effe
 
 The strength of each buff can be adjusted for any effect level and any phase. `durationMinutes` indicates the total duration of the effect for the specified level.
 
-The values in the buff parameters represent a multiplier added to the player's vanilla stats. For example, in a vanilla game a player's speed is 1 — receiving `speedPhase1: 0.5` makes it 1.5. This applies to all stats, meaning all potions also stack with the Well Rested effect.
+`speed`, `haste` and `attackSpeed` are multipliers added to the player's base stat. For example, base movement speed is 1 — receiving `speedPhase1: 0.25` makes it 1.25.
+
+`strength` works differently: it is flat attack damage, exactly like the Strength potion. `strengthPhase1: 1.5` adds 1.5 damage to every hit, no matter which weapon is held.
+
+All of these stack with potions.
 
 ---
 
@@ -191,7 +237,7 @@ The values in the buff parameters represent a multiplier added to the player's v
 
 heal = maxHealth × regenBonus × 0.5
 
-For example, with 20 HP (10 hearts) and `regenBonus = 0.1` — restores 1 HP (0.5 hearts) every 5 seconds.
+For example, with 20 HP (10 hearts) and `regenBonus = 0.05` — restores 0.5 HP every 5 seconds.
 
 <Admonition type="note">
     Regeneration and health increase remain the same regardless of the current phase of the effect.

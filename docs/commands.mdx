@@ -28,7 +28,8 @@ All commands live under a single root: `/midnightthoughts`.
 ├── comfort [target]
 └── wellrested
     ├── grant <targets> <level>
-    └── clear <targets>
+    ├── clear <targets>
+    └── info [target]
 ```
 
 ---
@@ -142,10 +143,33 @@ Grants or removes the Rested effect manually.
         ```
 
     </TabItem>
+    <TabItem value="info" label="Info">
+
+        ```
+        /midnightthoughts wellrested info [target]
+        ```
+
+        Prints the current state of the effect. With no argument it reports on the player running the command; with a player name it works from the console and from command blocks too.
+
+        ```
+        ── Well Rested: Steve ──
+        Level: 5
+        Phase: 2 / 3
+        Time left: 6:41 (8020 ticks)
+        Duration: 15:00 (18000 ticks)
+        ```
+
+        Both a readable time and the raw tick count are shown, so the output is equally useful in a bug report and while debugging.
+
+    </TabItem>
 </Tabs>
 
 <Admonition type="warning">
     If the Well Rested system is switched off in the config (`"wellRested": { "enabled": false }`), `grant` refuses to run and tells you so instead of silently doing nothing.
+</Admonition>
+
+<Admonition type="tip">
+    If you lower `durationMinutes` while an effect is already running, `info` will say the remaining time still exceeds the new duration. It is trimmed on the next tick, and the bar catches up with it.
 </Admonition>
 
 ---

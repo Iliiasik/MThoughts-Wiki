@@ -39,73 +39,73 @@ The config lives at `config/midnightthoughts.json` and is created on first launc
     "levels": {
       "level5": {
         "durationMinutes": 15,
-        "speedPhase1": 0.5,
-        "speedPhase2": 0.3,
-        "speedPhase3": 0.16,
-        "strengthPhase1": 0.24,
-        "strengthPhase2": 0.16,
-        "strengthPhase3": 0.08,
-        "attackSpeedPhase1": 0.12,
-        "attackSpeedPhase2": 0.06,
-        "attackSpeedPhase3": 0.03,
+        "speedPhase1": 0.25,
+        "speedPhase2": 0.15,
+        "speedPhase3": 0.08,
+        "strengthPhase1": 1.5,
+        "strengthPhase2": 1.0,
+        "strengthPhase3": 0.5,
+        "attackSpeedPhase1": 0.07,
+        "attackSpeedPhase2": 0.04,
+        "attackSpeedPhase3": 0.02,
         "healthBonus": 10.0,
-        "regenBonus": 0.1
+        "regenBonus": 0.05
       },
       "level4": {
         "durationMinutes": 10,
-        "speedPhase1": 0.4,
-        "speedPhase2": 0.24,
-        "speedPhase3": 0.12,
-        "strengthPhase1": 0.2,
-        "strengthPhase2": 0.12,
-        "strengthPhase3": 0.06,
-        "attackSpeedPhase1": 0.1,
-        "attackSpeedPhase2": 0.05,
+        "speedPhase1": 0.2,
+        "speedPhase2": 0.12,
+        "speedPhase3": 0.06,
+        "strengthPhase1": 1.0,
+        "strengthPhase2": 0.75,
+        "strengthPhase3": 0.5,
+        "attackSpeedPhase1": 0.06,
+        "attackSpeedPhase2": 0.03,
         "attackSpeedPhase3": 0.02,
         "healthBonus": 8.0,
-        "regenBonus": 0.08
+        "regenBonus": 0.04
       },
       "level3": {
         "durationMinutes": 7,
-        "speedPhase1": 0.32,
-        "speedPhase2": 0.18,
-        "speedPhase3": 0.08,
-        "strengthPhase1": 0.16,
-        "strengthPhase2": 0.08,
-        "strengthPhase3": 0.04,
-        "attackSpeedPhase1": 0.08,
-        "attackSpeedPhase2": 0.04,
-        "attackSpeedPhase3": 0.02,
+        "speedPhase1": 0.16,
+        "speedPhase2": 0.09,
+        "speedPhase3": 0.04,
+        "strengthPhase1": 0.75,
+        "strengthPhase2": 0.5,
+        "strengthPhase3": 0.25,
+        "attackSpeedPhase1": 0.05,
+        "attackSpeedPhase2": 0.03,
+        "attackSpeedPhase3": 0.01,
         "healthBonus": 6.0,
-        "regenBonus": 0.06
+        "regenBonus": 0.03
       },
       "level2": {
         "durationMinutes": 5,
-        "speedPhase1": 0.24,
-        "speedPhase2": 0.12,
-        "speedPhase3": 0.06,
-        "strengthPhase1": 0.12,
-        "strengthPhase2": 0.06,
-        "strengthPhase3": 0.03,
-        "attackSpeedPhase1": 0.06,
-        "attackSpeedPhase2": 0.03,
-        "attackSpeedPhase3": 0.01,
-        "healthBonus": 4.0,
-        "regenBonus": 0.04
-      },
-      "level1": {
-        "durationMinutes": 3,
-        "speedPhase1": 0.16,
-        "speedPhase2": 0.08,
-        "speedPhase3": 0.04,
-        "strengthPhase1": 0.08,
-        "strengthPhase2": 0.04,
-        "strengthPhase3": 0.02,
+        "speedPhase1": 0.12,
+        "speedPhase2": 0.06,
+        "speedPhase3": 0.03,
+        "strengthPhase1": 0.5,
+        "strengthPhase2": 0.25,
+        "strengthPhase3": 0.25,
         "attackSpeedPhase1": 0.04,
         "attackSpeedPhase2": 0.02,
         "attackSpeedPhase3": 0.01,
-        "healthBonus": 2.0,
+        "healthBonus": 4.0,
         "regenBonus": 0.02
+      },
+      "level1": {
+        "durationMinutes": 3,
+        "speedPhase1": 0.08,
+        "speedPhase2": 0.04,
+        "speedPhase3": 0.02,
+        "strengthPhase1": 0.25,
+        "strengthPhase2": 0.25,
+        "strengthPhase3": 0.25,
+        "attackSpeedPhase1": 0.02,
+        "attackSpeedPhase2": 0.01,
+        "attackSpeedPhase3": 0.01,
+        "healthBonus": 2.0,
+        "regenBonus": 0.01
       }
     }
   },
@@ -142,6 +142,7 @@ The config lives at `config/midnightthoughts.json` and is created on first launc
   },
   "ui": {
     "theme": "classic",
+    "wellRestedHudPosition": "left",
     "hideWellRestedHud": false,
     "hideSleepingPlayersHud": false,
     "hideThemeSwitchButton": false
@@ -149,12 +150,8 @@ The config lives at `config/midnightthoughts.json` and is created on first launc
 }
 ```
 
-<Admonition type="info" title="Loader differences">
-    Two keys exist only on some loaders and are not shown above:
-
-    `hastePhase1` / `hastePhase2` / `hastePhase3` inside each Well Rested level — mining speed bonuses. Minecraft has no such attribute before 1.21, so these are absent on 1.20.1.
-
-    `"wellRestedHudPosition"` inside `ui` — NeoForge only. See [Well Rested](./well-rested).
+<Admonition type="info" title="Version differences">
+    One group of keys is not shown above: `hastePhase1` / `hastePhase2` / `hastePhase3` inside each Well Rested level — mining speed bonuses. Minecraft has no such attribute before 1.21, so these are absent on 1.20.1.
 </Admonition>
 
 ---
@@ -177,12 +174,13 @@ The `ui` section is spread across several features, so here it is in one place:
 | Parameter | Default | Description |
 |---|---|---|
 | `theme` | `"classic"` | Default summary screen theme for everyone on the server. One of `classic`, `vanilla`, `tech`, `magic` — see [summary screen](./summary-screen) |
+| `wellRestedHudPosition` | `"left"` | Where the Rested bar sits on screen. One of `left`, `bar`, `right` — see [Well Rested](./well-rested) |
 | `hideWellRestedHud` | `false` | Hides the Rested effect bar with its level and remaining time — see [Well Rested](./well-rested) |
 | `hideSleepingPlayersHud` | `false` | Hides the `Sleeping 2/5` plate shown while anyone on the server is asleep — see [for servers](./for-servers) |
 | `hideThemeSwitchButton` | `false` | Removes the gear button, so players cannot pick their own theme — see [summary screen](./summary-screen) |
 
 <Admonition type="note">
-    All four are `false` by default, which means everything is shown. Setting one to `true` hides that element for every player on the server.
+    All three `hide` flags are `false` by default, which means everything is shown. Setting one to `true` hides that element for every player on the server.
 </Admonition>
 
 ---

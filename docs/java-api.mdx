@@ -4,13 +4,17 @@ import Admonition from '@theme/Admonition';
 
 # Java API
 
-Midnight Thoughts fires five events on the loader's event bus. Other mods can listen to them to react to sleep, or to change how comfortable a place is considered before the mod acts on it.
+Midnight Thoughts fires five events. Other mods can listen to them to react to sleep, or to change how comfortable a place is considered before the mod acts on it.
 
 <Admonition type="info" title="Who this page is for">
     Java mod developers. If you just want to script behaviour without writing a mod, use [KubeJS](./kubejs) — it exposes the same five events.
 </Admonition>
 
 All events live in the `mt.api.event` package.
+
+<Admonition type="note">
+    On Forge and NeoForge these are event bus classes, named `...Event`. On Fabric the same five hooks are Fabric API callbacks, named `...Callback`, each with a static `EVENT` field. The data they carry is identical; only the way you subscribe differs.
+</Admonition>
 
 ---
 
@@ -118,6 +122,26 @@ All events live in the `mt.api.event` package.
                         event.getPlayer().getName().getString(), event.getLevel());
             }
         }
+        ```
+
+    </TabItem>
+    <TabItem value="fabric" label="Fabric">
+
+        ```java
+        public class SleepHooks {
+            public static void register() {
+                WellRestedAppliedCallback.EVENT.register((player, level, mvp, durationTicks) ->
+                        LOGGER.info("{} woke up rested at level {}",
+                                player.getName().getString(), level));
+            }
+        }
+        ```
+
+        The comfort hook returns the value instead of mutating an event, and every listener receives the result of the previous one:
+
+        ```java
+        ComfortCalculatedCallback.EVENT.register((player, level) ->
+                player.level().dimension() == Level.NETHER ? -5 : level);
         ```
 
     </TabItem>
