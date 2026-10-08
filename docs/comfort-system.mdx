@@ -45,7 +45,7 @@ The whole system is configured in one block:
 | `sleepBlockEnabled` | `true` | Set to `false` to always allow sleeping, however grim the room |
 
 <Admonition type="tip">
-    A bigger `scanRadius` means a larger area is checked, which makes high comfort easier to reach — a lantern three rooms away still counts. Lowering it to 2 or 3 forces players to build a genuinely cosy bedroom rather than a cosy house.
+    A bigger `scanRadius` means a larger area is checked, which makes high comfort easier to reach - a lantern three rooms away still counts. Lowering it to 2 or 3 forces players to build a genuinely cosy bedroom rather than a cosy house.
 </Admonition>
 
 ---
@@ -77,7 +77,7 @@ Setting `"replace": false` ensures that new blocks are **added without overridin
 
 ## How comfort is scored
 
-Each category is checked **once**. Either at least one matching block was found within the scan radius, or none was — a room with twenty lanterns scores exactly the same as a room with one.
+Each category is checked **once**. Either at least one matching block was found within the scan radius, or none was - a room with twenty lanterns scores exactly the same as a room with one.
 
 Every category that was found adds its weight from the config. The sum is the comfort level.
 
@@ -120,7 +120,7 @@ With the defaults (`-1` and `-2`) that works out as:
 | -2 and below | Cannot sleep |
 
 <Admonition type="warning">
-    The sleep block is checked first. If comfort is low enough to hit both thresholds, the player simply cannot go to bed — there is no nightmare, because there is no sleep.
+    The sleep block is checked first. If comfort is low enough to hit both thresholds, the player simply cannot go to bed - there is no nightmare, because there is no sleep.
 </Admonition>
 
 <Admonition type="note">

@@ -7,7 +7,7 @@ import Admonition from '@theme/Admonition';
 Midnight Thoughts fires five events. Other mods can listen to them to react to sleep, or to change how comfortable a place is considered before the mod acts on it.
 
 <Admonition type="info" title="Who this page is for">
-    Java mod developers. If you just want to script behaviour without writing a mod, use [KubeJS](./kubejs) — it exposes the same five events.
+    Java mod developers. If you just want to script behaviour without writing a mod, use [KubeJS](./kubejs) - it exposes the same five events.
 </Admonition>
 
 All events live in the `mt.api.event` package.
@@ -22,10 +22,10 @@ All events live in the `mt.api.event` package.
 
 | Event | Fires when | Cancellable |
 |---|---|---|
-| `WellRestedAppliedEvent` | The Rested effect is granted | — |
-| `WellRestedExpiredEvent` | The Rested effect is removed | — |
-| `NightmareEvent` | A player falls asleep in nightmare conditions | — |
-| `MvpDeterminedEvent` | The night's MVP is chosen | — |
+| `WellRestedAppliedEvent` | The Rested effect is granted | - |
+| `WellRestedExpiredEvent` | The Rested effect is removed | - |
+| `NightmareEvent` | A player falls asleep in nightmare conditions | - |
+| `MvpDeterminedEvent` | The night's MVP is chosen | - |
 | `ComfortCalculatedEvent` | Comfort is calculated for a player | mutable result |
 
 <Tabs>
@@ -148,14 +148,14 @@ All events live in the `mt.api.event` package.
 </Tabs>
 
 <Admonition type="note">
-    Every event is fired on the **server** side only. There is no client-side counterpart — the client is told the result over the network, not through events.
+    Every event is fired on the **server** side only. There is no client-side counterpart - the client is told the result over the network, not through events.
 </Admonition>
 
 ---
 
 ## Overriding comfort
 
-`ComfortCalculatedEvent` is the extension point worth knowing about. The mod reads the level back out of the event after posting it, so whatever a listener leaves there becomes the real comfort level — driving the Rested level, nightmares, and the sleep block.
+`ComfortCalculatedEvent` is the extension point worth knowing about. The mod reads the level back out of the event after posting it, so whatever a listener leaves there becomes the real comfort level - driving the Rested level, nightmares, and the sleep block.
 
 ```java
 @SubscribeEvent
@@ -168,15 +168,15 @@ public static void onComfort(ComfortCalculatedEvent event) {
 ```
 
 <Admonition type="tip">
-    This lets another mod add its own comfort sources — a "cosy campfire" block, a biome modifier, a magic ward — without touching the tag system at all. Read the current value, adjust it, write it back.
+    This lets another mod add its own comfort sources - a "cosy campfire" block, a biome modifier, a magic ward - without touching the tag system at all. Read the current value, adjust it, write it back.
 </Admonition>
 
 <Admonition type="warning">
-    Results are cached per player and position for a short window, so the event does not fire on every tick. Do not rely on it as a polling mechanism — treat it as "the mod is about to make a decision, last chance to influence it".
+    Results are cached per player and position for a short window, so the event does not fire on every tick. Do not rely on it as a polling mechanism - treat it as "the mod is about to make a decision, last chance to influence it".
 </Admonition>
 
 ---
 
 ## Data pack alternative
 
-If all you want is to add blocks that make a bedroom cosier, you do not need Java at all — the [comfort system](./comfort-system) is driven by block tags, and a data pack can extend them in a few lines of JSON.
+If all you want is to add blocks that make a bedroom cosier, you do not need Java at all - the [comfort system](./comfort-system) is driven by block tags, and a data pack can extend them in a few lines of JSON.

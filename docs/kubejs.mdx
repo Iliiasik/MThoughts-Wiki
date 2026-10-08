@@ -4,7 +4,7 @@ import Admonition from '@theme/Admonition';
 
 # KubeJS
 
-If [KubeJS](https://www.curseforge.com/minecraft/mc-mods/kubejs) is installed, Midnight Thoughts exposes a binding and five events, so you can react to sleep, hand out the Rested effect, and even override how comfortable a bedroom is — all from a script, with no Java and no recompiling.
+If [KubeJS](https://www.curseforge.com/minecraft/mc-mods/kubejs) is installed, Midnight Thoughts exposes a binding and five events, so you can react to sleep, hand out the Rested effect, and even override how comfortable a bedroom is - all from a script, with no Java and no recompiling.
 
 <Admonition type="info" title="Optional dependency">
     KubeJS is entirely optional. The mod detects it at load time; without it nothing changes and no errors are printed.
@@ -22,9 +22,9 @@ The global object is called `MidnightThoughts`.
 
 | Method | Returns | Description |
 |---|---|---|
-| `grantWellRested(player, level)` | — | Applies the Rested effect at level 1–5 |
-| `grantMvp(player)` | — | Applies the MVP variant of the effect |
-| `clearWellRested(player)` | — | Removes the effect |
+| `grantWellRested(player, level)` | - | Applies the Rested effect at level 1–5 |
+| `grantMvp(player)` | - | Applies the MVP variant of the effect |
+| `clearWellRested(player)` | - | Removes the effect |
 | `hasWellRested(player)` | `boolean` | Whether the effect is currently active |
 | `getLevel(player)` | `int` | Current effect level, `0` if inactive |
 | `getComfort(player)` | `int` | Comfort level around the player right now |
@@ -38,7 +38,7 @@ ItemEvents.rightClicked('minecraft:clock', event => {
 ```
 
 <Admonition type="note">
-    `getComfort` returns the same comfort level the rest of the mod acts on — the one compared against `nightmareThreshold` and `sleepBlockThreshold`. See the [comfort system](./comfort-system).
+    `getComfort` returns the same comfort level the rest of the mod acts on - the one compared against `nightmareThreshold` and `sleepBlockThreshold`. See the [comfort system](./comfort-system).
 </Admonition>
 
 ---
@@ -129,7 +129,7 @@ All events are registered under the `MidnightThoughtsEvents` group.
         |---|---|---|
         | `getPlayer()` | `ServerPlayer` | Whose surroundings were scanned |
         | `getLevel()` | `int` | The calculated comfort level |
-        | `setLevel(int)` | — | **Overrides** the result |
+        | `setLevel(int)` | - | **Overrides** the result |
 
         ```js
         // A bed in the Nether is never comfortable
@@ -147,7 +147,7 @@ All events are registered under the `MidnightThoughtsEvents` group.
 
 ## Overriding comfort
 
-`comfortCalculated` is the only event with a setter, and it is the most powerful hook the mod offers. The value you set is what the rest of the mod uses — it decides the Rested level, whether nightmares trigger, and whether sleep is blocked at all.
+`comfortCalculated` is the only event with a setter, and it is the most powerful hook the mod offers. The value you set is what the rest of the mod uses - it decides the Rested level, whether nightmares trigger, and whether sleep is blocked at all.
 
 That makes it enough to build entire custom rules on top of the block-scanning system:
 
@@ -166,7 +166,7 @@ MidnightThoughtsEvents.comfortCalculated(event => {
 </Admonition>
 
 <Admonition type="warning">
-    Because `setLevel` overrides everything, a script that unconditionally sets a high value effectively disables the comfort system. That is a valid thing to want — just be aware it is what you are doing.
+    Because `setLevel` overrides everything, a script that unconditionally sets a high value effectively disables the comfort system. That is a valid thing to want - just be aware it is what you are doing.
 </Admonition>
 
 ---
@@ -174,7 +174,7 @@ MidnightThoughtsEvents.comfortCalculated(event => {
 ## Availability
 
 <Admonition type="info">
-    The integration ships with the Forge and NeoForge builds, on the Minecraft versions where a matching KubeJS build exists. There is no KubeJS integration in the Fabric build. If you load the mod where KubeJS is unavailable, the integration simply does not register — everything else works as normal.
+    The integration ships with the Forge and NeoForge builds, on the Minecraft versions where a matching KubeJS build exists. There is no KubeJS integration in the Fabric build. If you load the mod where KubeJS is unavailable, the integration simply does not register - everything else works as normal.
 </Admonition>
 
 Java mod developers who want the same hooks without KubeJS should use the [Java API](./java-api) instead.

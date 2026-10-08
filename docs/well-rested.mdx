@@ -10,7 +10,7 @@ import Admonition from '@theme/Admonition';
 
 The Well Rested level depends on the [comfort](./comfort-system) of the sleeping area.
 
-After waking up, the player receives the **Rested** effect. The effect has **up to 5 levels** — higher levels increase **strength** and **duration**.
+After waking up, the player receives the **Rested** effect. The effect has **up to 5 levels** - higher levels increase **strength** and **duration**.
 
 Each level progresses through **three phases**, gradually weakening over time:
 
@@ -95,7 +95,7 @@ The whole system can be switched off with a single flag:
 }
 ```
 
-With `enabled: false` no effect is ever granted — sleeping still shows the overlay and the summary, players just wake up without buffs.
+With `enabled: false` no effect is ever granted - sleeping still shows the overlay and the summary, players just wake up without buffs.
 
 In the config, the following fields are responsible for the strength of the effects:
 
@@ -223,7 +223,7 @@ In the config, the following fields are responsible for the strength of the effe
 
 The strength of each buff can be adjusted for any effect level and any phase. `durationMinutes` indicates the total duration of the effect for the specified level.
 
-`speed`, `haste` and `attackSpeed` are multipliers added to the player's base stat. For example, base movement speed is 1 — receiving `speedPhase1: 0.25` makes it 1.25.
+`speed`, `haste` and `attackSpeed` are multipliers added to the player's base stat. For example, base movement speed is 1 - receiving `speedPhase1: 0.25` makes it 1.25.
 
 `strength` works differently: it is flat attack damage, exactly like the Strength potion. `strengthPhase1: 1.5` adds 1.5 damage to every hit, no matter which weapon is held.
 
@@ -237,7 +237,7 @@ All of these stack with potions.
 
 heal = maxHealth × regenBonus × 0.5
 
-For example, with 20 HP (10 hearts) and `regenBonus = 0.05` — restores 0.5 HP every 5 seconds.
+For example, with 20 HP (10 hearts) and `regenBonus = 0.05` - restores 0.5 HP every 5 seconds.
 
 <Admonition type="note">
     Regeneration and health increase remain the same regardless of the current phase of the effect.
@@ -260,4 +260,4 @@ Useful for event servers, testing a config change, or rewarding players after a 
     `grant` refuses to run while `"enabled": false` and says so, rather than pretending to work.
 </Admonition>
 
-Mod and modpack developers can do the same from code — see [KubeJS](./kubejs) and the [Java API](./java-api).
+Mod and modpack developers can do the same from code - see [KubeJS](./kubejs) and the [Java API](./java-api).

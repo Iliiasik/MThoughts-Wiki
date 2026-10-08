@@ -7,7 +7,7 @@ import Admonition from '@theme/Admonition';
 The config lives at `config/midnightthoughts.json` and is created on first launch.
 
 <Admonition type="info">
-    A full explanation of every parameter is on the matching page in the sidebar. This page is the complete reference — the file as a whole, plus the rules the mod applies when reading it.
+    A full explanation of every parameter is on the matching page in the sidebar. This page is the complete reference - the file as a whole, plus the rules the mod applies when reading it.
 </Admonition>
 
 ---
@@ -151,7 +151,7 @@ The config lives at `config/midnightthoughts.json` and is created on first launc
 ```
 
 <Admonition type="info" title="Version differences">
-    One group of keys is not shown above: `hastePhase1` / `hastePhase2` / `hastePhase3` inside each Well Rested level — mining speed bonuses. Minecraft has no such attribute before 1.21, so these are absent on 1.20.1.
+    One group of keys is not shown above: `hastePhase1` / `hastePhase2` / `hastePhase3` inside each Well Rested level - mining speed bonuses. Minecraft has no such attribute before 1.21, so these are absent on 1.20.1.
 </Admonition>
 
 ---
@@ -173,11 +173,11 @@ The `ui` section is spread across several features, so here it is in one place:
 
 | Parameter | Default | Description |
 |---|---|---|
-| `theme` | `"classic"` | Default summary screen theme for everyone on the server. One of `classic`, `vanilla`, `tech`, `magic` — see [summary screen](./summary-screen) |
-| `wellRestedHudPosition` | `"left"` | Where the Rested bar sits on screen. One of `left`, `bar`, `right` — see [Well Rested](./well-rested) |
-| `hideWellRestedHud` | `false` | Hides the Rested effect bar with its level and remaining time — see [Well Rested](./well-rested) |
-| `hideSleepingPlayersHud` | `false` | Hides the `Sleeping 2/5` plate shown while anyone on the server is asleep — see [for servers](./for-servers) |
-| `hideThemeSwitchButton` | `false` | Removes the gear button, so players cannot pick their own theme — see [summary screen](./summary-screen) |
+| `theme` | `"classic"` | Default summary screen theme for everyone on the server. One of `classic`, `vanilla`, `tech`, `magic` - see [summary screen](./summary-screen) |
+| `wellRestedHudPosition` | `"left"` | Where the Rested bar sits on screen. One of `left`, `bar`, `right` - see [Well Rested](./well-rested) |
+| `hideWellRestedHud` | `false` | Hides the Rested effect bar with its level and remaining time - see [Well Rested](./well-rested) |
+| `hideSleepingPlayersHud` | `false` | Hides the `Sleeping 2/5` plate shown while anyone on the server is asleep - see [for servers](./for-servers) |
+| `hideThemeSwitchButton` | `false` | Removes the gear button, so players cannot pick their own theme - see [summary screen](./summary-screen) |
 
 <Admonition type="note">
     All three `hide` flags are `false` by default, which means everything is shown. Setting one to `true` hides that element for every player on the server.
@@ -190,7 +190,7 @@ The `ui` section is spread across several features, so here it is in one place:
 Most settings are **server-authoritative**. When you join a server, it sends its config to your client, and that copy wins over your local file for the session. This keeps overlay timings, opacity, comfort rules and the default theme consistent for everyone.
 
 <Admonition type="tip">
-    The exception is your personal theme. If you pick one with the gear button, it stays yours regardless of the server default — see [summary screen](./summary-screen).
+    The exception is your personal theme. If you pick one with the gear button, it stays yours regardless of the server default - see [summary screen](./summary-screen).
 </Admonition>
 
 Changing the config on a live server does not require a restart:
@@ -233,7 +233,7 @@ The config is checked every time it is read. Values that make no sense are corre
 
         `"theme"` only accepts `classic`, `vanilla`, `tech` or `magic`. Anything else resets to `classic`.
 
-        Numbers that are not numbers at all — `NaN`, `Infinity` — reset to their defaults instead of being clamped.
+        Numbers that are not numbers at all - `NaN`, `Infinity` - reset to their defaults instead of being clamped.
 
         A missing Well Rested level is restored from defaults, so deleting `level3` from the file is a valid way to reset just that one.
 
@@ -242,12 +242,12 @@ The config is checked every time it is read. Values that make no sense are corre
 
         Any key absent from the file is filled in with its default, and the file is rewritten so you can see and edit it. Values already present are preserved.
 
-        Deleting a key — or a whole section — is therefore a valid way to reset it.
+        Deleting a key - or a whole section - is therefore a valid way to reset it.
 
     </TabItem>
     <TabItem value="broken" label="Broken files">
 
-        If the file cannot be parsed at all — a stray comma, a truncated write — the mod does **not** crash and does not silently overwrite your work. The damaged file is renamed to `midnightthoughts.json.broken` and a fresh default config is generated.
+        If the file cannot be parsed at all - a stray comma, a truncated write - the mod does **not** crash and does not silently overwrite your work. The damaged file is renamed to `midnightthoughts.json.broken` and a fresh default config is generated.
 
         <Admonition type="tip">
             Your original is still there under the `.broken` name. Fix the syntax error and rename it back.
@@ -260,7 +260,7 @@ The config is checked every time it is read. Values that make no sense are corre
 
 ## Safe writing
 
-The config and the statistics file are written atomically — the mod writes to a temporary file and then swaps it into place. A crash or a power cut in the middle of a save leaves the previous version intact instead of a half-written file.
+The config and the statistics file are written atomically - the mod writes to a temporary file and then swaps it into place. A crash or a power cut in the middle of a save leaves the previous version intact instead of a half-written file.
 
 <Admonition type="note">
     Statistics are also kept in memory while the server runs and flushed on player disconnect and on shutdown, rather than re-read from disk on every access.

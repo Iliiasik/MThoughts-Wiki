@@ -15,7 +15,7 @@ Two configuration flags are available:
 
 ## Behavior overview
 
-During mod initialization, configuration directories are automatically created in the config folder — **one folder per supported language**, thirteen in total, each with the five category files.
+During mod initialization, configuration directories are automatically created in the config folder - **one folder per supported language**, thirteen in total, each with the five category files.
 
 ![Folders](/img/custom_facts.png)
 
@@ -64,11 +64,11 @@ Custom content is sent from the server to every client that joins, so there are 
 | Total custom content | 512 KB | Delivery stops at that point and the log tells you which language and category it stopped on |
 
 <Admonition type="note">
-    These are generous — 512 KB is far more text than any player will read in a lifetime of nights. The limits exist so that a malformed or auto-generated file cannot stall every player's login.
+    These are generous - 512 KB is far more text than any player will read in a lifetime of nights. The limits exist so that a malformed or auto-generated file cannot stall every player's login.
 </Admonition>
 
 <Admonition type="warning">
-    A file that is not valid JSON is reported in the log and skipped. The rest of your custom content still loads — one broken file does not take the others down with it.
+    A file that is not valid JSON is reported in the log and skipped. The rest of your custom content still loads - one broken file does not take the others down with it.
 </Admonition>
 
 ---

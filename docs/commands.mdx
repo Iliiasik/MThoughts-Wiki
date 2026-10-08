@@ -40,15 +40,15 @@ Reloads mod data from disk without restarting the server.
 
 | Command | What it reloads |
 |---|---|
-| `/midnightthoughts reload config` | `midnightthoughts.json` — validated, then pushed to every online player |
-| `/midnightthoughts reload achievements` | `achievements.json` — reports how many were loaded |
+| `/midnightthoughts reload config` | `midnightthoughts.json` - validated, then pushed to every online player |
+| `/midnightthoughts reload achievements` | `achievements.json` - reports how many were loaded |
 | `/midnightthoughts reload content` | Custom facts in `config/midnightthoughts/dreams/`, and recreates any missing default files |
 | `/midnightthoughts reload all` | All three at once |
 
 Running `/midnightthoughts reload` with no argument is the same as `reload all`.
 
 <Admonition type="tip">
-    Config reload also re-syncs the values to connected clients, so overlay timings, opacity and theme take effect immediately — no reconnect needed.
+    Config reload also re-syncs the values to connected clients, so overlay timings, opacity and theme take effect immediately - no reconnect needed.
 </Admonition>
 
 <Admonition type="note">
@@ -94,13 +94,13 @@ Scan radius: 5
 Cozy surroundings
   ● Lighting     +1
   ● Carpet       +1
-  ○ Furniture     —
+  ○ Furniture     -
   ● Decoration   +1
-  ○ Structure     —
+  ○ Structure     -
 Unsettling surroundings
-  ○ Macabre       —
+  ○ Macabre       -
   ● Hostile      -1
-  ○ Dark          —
+  ○ Dark          -
 Total comfort: +2
 Nightmares: no (threshold -1)
 Sleep blocked: no (threshold -2)
@@ -176,7 +176,7 @@ Grants or removes the Rested effect manually.
 
 ## Automation
 
-Because every command is a normal Brigadier command, they can be used from command blocks, datapack functions and server consoles — with the single exception of `comfort` without a target, which needs a player to report on.
+Because every command is a normal Brigadier command, they can be used from command blocks, datapack functions and server consoles - with the single exception of `comfort` without a target, which needs a player to report on.
 
 ```mcfunction
 # Reward the whole server after a boss fight

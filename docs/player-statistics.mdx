@@ -23,13 +23,13 @@ Custom achievements are also displayed; more information is available in the [cu
     Statistics are counted **since your last sleep**, not since the world began, and each player has their own counter. If someone else sleeps while you are awake, your numbers keep running.
 </Admonition>
 
-Records — best distance, most blocks, most mobs — and unlocked achievements persist across sessions. They are stored per world and saved atomically, so a crash cannot corrupt them.
+Records - best distance, most blocks, most mobs - and unlocked achievements persist across sessions. They are stored per world and saved atomically, so a crash cannot corrupt them.
 
 ---
 
 ## MVP
 
-Multiplayer features an MVP — the player with the most points since their last sleep. If other players slept while a player was awake, their stats are not reset; the counter is unique to each player.
+Multiplayer features an MVP - the player with the most points since their last sleep. If other players slept while a player was awake, their stats are not reset; the counter is unique to each player.
 
 <Tabs>
     <TabItem value="points" label="Points" default>
@@ -62,10 +62,10 @@ Multiplayer features an MVP — the player with the most points since their last
 </Tabs>
 
 <Admonition type="info">
-    `minScoreRequired: 10` — the minimum number of points required to be an MVP. If no player reaches this threshold, there will be no MVP that night.
+    `minScoreRequired: 10` - the minimum number of points required to be an MVP. If no player reaches this threshold, there will be no MVP that night.
 </Admonition>
 
-The MVP receives a separate buff — as powerful as Well Rested level 5, but with a different duration (`mvpWellRestedDurationMinutes: 21`). By default this is longer than the standard level 5 duration.
+The MVP receives a separate buff - as powerful as Well Rested level 5, but with a different duration (`mvpWellRestedDurationMinutes: 21`). By default this is longer than the standard level 5 duration.
 
 ![MVP](/img/mvp.png)
 

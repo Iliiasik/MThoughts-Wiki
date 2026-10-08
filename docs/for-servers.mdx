@@ -81,7 +81,7 @@ The file is re-read, validated, and pushed to everyone currently online. See [co
 
 ## The sleeping players plate
 
-While anyone is asleep, a small plate in the corner shows how many players are sleeping out of how many are online — for example `Sleeping 2/5`. It updates as players get in and out of bed, and also when someone joins or leaves, so the denominator never goes stale.
+While anyone is asleep, a small plate in the corner shows how many players are sleeping out of how many are online - for example `Sleeping 2/5`. It updates as players get in and out of bed, and also when someone joins or leaves, so the denominator never goes stale.
 
 ```json
 "ui": {
@@ -92,7 +92,7 @@ While anyone is asleep, a small plate in the corner shows how many players are s
 Set it to `true` to hide the plate entirely. It is off by default, meaning the plate is shown.
 
 <Admonition type="note">
-    On a single-player world the plate is not particularly useful, but it is not hidden automatically — some players like the confirmation that the night is being skipped.
+    On a single-player world the plate is not particularly useful, but it is not hidden automatically - some players like the confirmation that the night is being skipped.
 </Admonition>
 
 ---
@@ -101,7 +101,7 @@ Set it to `true` to hide the plate entirely. It is off by default, meaning the p
 
 Two things get written to disk regularly: the config and per-player statistics.
 
-Both are written **atomically** — the mod writes a temporary file and swaps it into place, so a crash or a power cut during a save leaves the previous version intact instead of a truncated file.
+Both are written **atomically** - the mod writes a temporary file and swaps it into place, so a crash or a power cut during a save leaves the previous version intact instead of a truncated file.
 
 Statistics are held in memory while the server runs and flushed when a player disconnects and on shutdown, rather than being re-read for every access.
 
@@ -113,7 +113,7 @@ Statistics are held in memory while the server runs and flushed when a player di
 
 ## Performance
 
-Comfort scans are the only meaningful per-player work, and results are cached per player, per position, for a short window — so walking around does not re-scan on every tick, and the scan only actually runs when a player interacts with a bed.
+Comfort scans are the only meaningful per-player work, and results are cached per player, per position, for a short window - so walking around does not re-scan on every tick, and the scan only actually runs when a player interacts with a bed.
 
 <Admonition type="note">
     In profiling on a live server, the mod accounts for a fraction of a percent of the server tick. Raising `scanRadius` to its maximum of 8 increases the scanned volume noticeably; if you run a large server and want to be careful, that is the one number worth watching.
@@ -123,4 +123,4 @@ Comfort scans are the only meaningful per-player work, and results are cached pe
 
 ## Extending behaviour
 
-Server owners who want custom rules — a dimension that is always uncomfortable, a reward when someone becomes MVP, a debuff after a nightmare — can script it with [KubeJS](./kubejs) without writing a mod, or hook the [Java API](./java-api) from an existing one.
+Server owners who want custom rules - a dimension that is always uncomfortable, a reward when someone becomes MVP, a debuff after a nightmare - can script it with [KubeJS](./kubejs) without writing a mod, or hook the [Java API](./java-api) from an existing one.
