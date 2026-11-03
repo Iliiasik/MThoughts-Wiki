@@ -59,6 +59,26 @@ The cards are sorted: the MVP comes first, then your own card, then everyone els
 
 ---
 
+## Summary size
+
+By default the summary is as large as the screen allows. If it looks too big next to the rest of the interface, change **Summary size** in the config screen, in the **Interface** section, or set `summaryScale` in the file:
+
+| Value | In the file | Size |
+|---|---|---|
+| Auto | `0` | As large as fits on the screen. This is the default |
+| 1x | `1` | One pixel of the texture is one pixel of the interface, like vanilla screens. The size follows the game's **GUI Scale** option |
+| 2x, 3x, 4x | `2`, `3`, `4` | A fixed size |
+
+The summary never grows past the screen. If the chosen size does not fit, it uses the largest size that does, so on a small screen 3x and 4x can look the same as Auto.
+
+Every size is a whole multiple, so the textures and the text always stay sharp.
+
+<Admonition type="note">
+    This is a personal setting. It is read from your own config file even on a server, so every player can pick the size that suits their monitor. The config screen is empty while you are connected to a server, so change it from the main menu or in single player.
+</Admonition>
+
+---
+
 ## Themes
 
 <Tabs>

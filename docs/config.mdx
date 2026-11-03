@@ -26,7 +26,7 @@ The screen is split into five sections:
 | Section | What is inside |
 |---|---|
 | **Sleep overlay** | Overlay, moon, stardust, space objects, slide times, fades, opacity, text and moon size, facts API, custom content, chat and HUD messages |
-| **Interface** | Theme, Well Rested HUD position, hiding the Well Rested HUD and the sleeping players HUD |
+| **Interface** | Theme, Well Rested HUD position, hiding the Well Rested HUD and the sleeping players HUD, summary size |
 | **MVP scoring** | MVP on or off, points, death penalty, MVP buff duration |
 | **Comfort** | Comfort on or off, scan radius, nightmares, sleep block, all eight weights |
 | **Server behaviour** | Phantom timer for non-sleepers, vanilla sleep messages |
@@ -324,7 +324,8 @@ The screen works from the main menu and in single player. Every option has a too
     "theme": "classic",
     "wellRestedHudPosition": "left",
     "hideWellRestedHud": false,
-    "hideSleepingPlayersHud": false
+    "hideSleepingPlayersHud": false,
+    "summaryScale": 0
   }
 }
 ```
@@ -360,6 +361,7 @@ The `ui` section is spread across several features, so here it is in one place:
 | `wellRestedHudPosition` | `"left"` | Where the Rested bar sits on screen. One of `left`, `bar`, `right`. See [Well Rested](./well-rested) |
 | `hideWellRestedHud` | `false` | Hides the Rested effect bar with its level and remaining time. See [Well Rested](./well-rested) |
 | `hideSleepingPlayersHud` | `false` | Hides the `Sleeping 2/5` plate shown while anyone on the server is asleep. See [for servers](./for-servers) |
+| `summaryScale` | `0` | Size of the summary screen. `0` is Auto, `1` to `4` is a fixed size. Personal setting, never taken from the server. See [summary screen](./summary-screen#summary-size) |
 
 <Admonition type="note">
     Both `hide` flags are `false` by default, which means everything is shown. Setting one to `true` hides that element for every player on the server.
@@ -374,6 +376,8 @@ The `ui` section is spread across several features, so here it is in one place:
 ## Where the values come from
 
 Most settings are **server-authoritative**. When you join a server, it sends its config to your client, and that copy wins over your local file for the session. This keeps overlay timings, opacity, comfort rules and the theme consistent for everyone.
+
+The only exception is `summaryScale`. It depends on each player's monitor, so it is always read from the player's own file, also on a server.
 
 <Admonition type="tip">
     In single player your own file is used, and the config screen edits it directly.
@@ -404,6 +408,7 @@ The config is checked every time it is read. Values that make no sense are corre
         | `fadeInDurationMs`, `fadeOutDurationMs` | 0 to 10000 |
         | `overlayOpacity`, `textOpacity`, `imageOpacity`, `specialSlideChance` | 0.0 to 1.0 |
         | `textScale`, `imageScale` | 0.5 to 1.5 |
+        | `summaryScale` | 0 to 4 |
         | `durationMinutes`, `mvpWellRestedDurationMinutes` | 1 to 1440 |
         | `regenBonus` | 0.0 to 1.0 |
         | Attribute `phase1` / `phase2` / `phase3` | -10000 to 10000 |
