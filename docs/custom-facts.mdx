@@ -1,3 +1,5 @@
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
 import Admonition from '@theme/Admonition';
 
 # Custom facts
@@ -35,13 +37,36 @@ If `userContentReplaces` is set to `true`, all local database facts are **fully 
 
 ## File format
 
-```json
-{
-  "entries": [
-    { "text": "Text example", "rarity": 1.0 }
-  ]
-}
-```
+<Tabs>
+    <TabItem value="single" label="One entry" default>
+
+        ```json
+        {
+          "entries": [
+            { "text": "Text example", "rarity": 1.0 }
+          ]
+        }
+        ```
+
+    </TabItem>
+    <TabItem value="multiple" label="Several entries">
+
+        ```json
+        {
+          "entries": [
+            { "text": "First fact", "rarity": 1.0 },
+            { "text": "Second fact", "rarity": 1.0 },
+            { "text": "A rare third fact", "rarity": 0.2 }
+          ]
+        }
+        ```
+
+    </TabItem>
+</Tabs>
+
+<Admonition type="warning" title="Commas between entries">
+    Every entry except the last one must end with a comma. Without it the file is not valid JSON and is skipped completely. The last entry must **not** have a comma after it.
+</Admonition>
 
 | Field | Description |
 |---|---|

@@ -25,6 +25,8 @@ All commands live under a single root: `/midnightthoughts`.
 │   ├── achievements
 │   ├── content
 │   └── all
+├── config
+│   └── recreate
 ├── comfort [target]
 └── wellrested
     ├── grant <targets> <level>
@@ -53,6 +55,22 @@ Running `/midnightthoughts reload` with no argument is the same as `reload all`.
 
 <Admonition type="note">
     A reloaded config goes through the same validation as a config loaded at startup. Out-of-range values are clamped and reported in the server log rather than rejected.
+</Admonition>
+
+---
+
+## Config recreate
+
+```
+/midnightthoughts config recreate
+```
+
+Throws the current config away and writes a fresh one with all default values, then syncs it to every online player. Useful after an update, or when the file was edited so much that it is easier to start over.
+
+The old file is not deleted. It is renamed to `midnightthoughts.json.backup` next to the new one, so you can copy your values back. If a backup from an earlier run already exists, it is replaced.
+
+<Admonition type="warning">
+    If the old file cannot be backed up, for example because it is locked by another program, the command stops and changes nothing.
 </Admonition>
 
 ---
@@ -102,12 +120,14 @@ Unsettling surroundings
   ● Hostile      -1
   ○ Dark          -
 Total comfort: +2
-Nightmares: no (threshold -1)
-Sleep blocked: no (threshold -2)
+Nightmares: no (triggers at ≤ -1)
+Sleep blocked: no (triggers at ≤ -2)
 ```
 
+If nightmares or the sleep block are switched off in the config, the line says `(disabled)` instead of the threshold.
+
 <Admonition type="tip">
-    This is the fastest way to answer "why can't I sleep here?". A filled circle means the category was found within the scan radius; the number next to it is the weight from the config.
+    This is the fastest way to answer "why can't I sleep here?". A filled circle means the category was found within the scan radius, and the number next to it is the weight from the config.
 </Admonition>
 
 ---
@@ -149,7 +169,7 @@ Grants or removes the Rested effect manually.
         /midnightthoughts wellrested info [target]
         ```
 
-        Prints the current state of the effect. With no argument it reports on the player running the command; with a player name it works from the console and from command blocks too.
+        Prints the current state of the effect. With no argument it reports on the player running the command. With a player name it works from the console and from command blocks too.
 
         ```
         ── Well Rested: Steve ──
@@ -176,7 +196,7 @@ Grants or removes the Rested effect manually.
 
 ## Automation
 
-Because every command is a normal Brigadier command, they can be used from command blocks, datapack functions and server consoles - with the single exception of `comfort` without a target, which needs a player to report on.
+Because every command is a normal Brigadier command, they can be used from command blocks, datapack functions and server consoles. The only exceptions are `comfort` and `wellrested info` without a target, which need a player to report on.
 
 ```mcfunction
 # Reward the whole server after a boss fight

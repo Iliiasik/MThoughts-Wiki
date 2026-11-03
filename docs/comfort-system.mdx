@@ -11,7 +11,9 @@ When a player goes to bed, their **rest level** after waking depends on the **co
 Comfort is influenced by nearby elements such as furniture, plants in pots, glass, carpets, and lanterns.
 Some blocks **increase comfort**, while others **decrease it**.
 
-The whole system is configured in one block:
+Comfort is measured around the bed at the moment the player lies down, and that value is used for the whole night. Each new sleep is measured fresh, so a rebuilt bedroom counts from the next time you go to bed.
+
+The whole system is configured in one block of the config file. Everything here can also be changed in game, in the **Comfort** section of the config screen.
 
 ```json
 "comfort": {
@@ -37,7 +39,7 @@ The whole system is configured in one block:
 | Parameter | Default | Description |
 |---|---|---|
 | `enabled` | `true` | Set to `false` to switch the comfort system off entirely |
-| `scanRadius` | `5` | How many blocks around the bed are scanned, 0–8 |
+| `scanRadius` | `5` | How many blocks around the bed are scanned, from 0 to 8 |
 | `weights` | see below | How much each category contributes |
 | `nightmareThreshold` | `-1` | Comfort at or below this triggers nightmares |
 | `sleepBlockThreshold` | `-2` | Comfort at or below this prevents sleep entirely |
@@ -59,6 +61,10 @@ Place your tag files in:
 ```
 data/midnightthoughts/tags/block/
 ```
+
+<Admonition type="warning" title="1.20.1">
+    On 1.20.1 the folder is called `blocks`, not `block`: `data/midnightthoughts/tags/blocks/`. Minecraft renamed it in 1.21.
+</Admonition>
 
 Each file must contain a JSON list of blocks:
 
@@ -95,7 +101,7 @@ Every category that was found adds its weight from the config. The sum is the co
 With the default weights that gives a range from **-3** to **+5**. The positive result becomes the [Well Rested](./well-rested) level, so all five positive categories present means level 5.
 
 <Admonition type="tip" title="Designing your own balance">
-    Weights are the main balancing lever. Making `structure` worth 2 rewards enclosed bedrooms; making `dark` worth -3 turns an unlit room into an automatic nightmare no matter what furniture is in it. Any weight can be negative or positive, from -100 to 100.
+    Weights are the main balancing lever. Making `structure` worth 2 rewards enclosed bedrooms, making `dark` worth -3 turns an unlit room into an automatic nightmare no matter what furniture is in it. Any weight can be negative or positive, from -100 to 100.
 </Admonition>
 
 ---
@@ -124,7 +130,7 @@ With the defaults (`-1` and `-2`) that works out as:
 </Admonition>
 
 <Admonition type="note">
-    Both behaviours can be turned off independently. `"nightmareEnabled": false` keeps the comfort scoring but never shows nightmares; `"sleepBlockEnabled": false` lets players sleep anywhere while still getting nightmares in bad places.
+    Both behaviours can be turned off independently. `"nightmareEnabled": false` keeps the comfort scoring but never shows nightmares. `"sleepBlockEnabled": false` lets players sleep anywhere while still getting nightmares in bad places.
 </Admonition>
 
 ---
@@ -280,7 +286,6 @@ It prints every category, whether it was found, the weight it contributed, the t
                     "minecraft:potted_oxeye_daisy",
                     "minecraft:potted_cornflower",
                     "minecraft:potted_lily_of_the_valley",
-                    "minecraft:potted_wither_rose",
                     "minecraft:potted_red_mushroom",
                     "minecraft:potted_brown_mushroom",
                     "minecraft:potted_dead_bush",
@@ -599,7 +604,6 @@ It prints every category, whether it was found, the weight it contributed, the t
                     "minecraft:potted_oxeye_daisy",
                     "minecraft:potted_cornflower",
                     "minecraft:potted_lily_of_the_valley",
-                    "minecraft:potted_wither_rose",
                     "minecraft:potted_red_mushroom",
                     "minecraft:potted_brown_mushroom",
                     "minecraft:potted_dead_bush",

@@ -2,29 +2,56 @@ import Admonition from '@theme/Admonition';
 
 # Compatibility
 
-<Admonition type="tip">
-    This mod is compatible with the **Sleep Tight** mod.
-</Admonition>
+## Versions and loaders
+
+| Minecraft | Loaders | KubeJS integration |
+|---|---|---|
+| 1.20.1 | Forge, Fabric | Forge and Fabric |
+| 1.21.1 | NeoForge, Fabric | NeoForge |
+| 26.1.2 | NeoForge, Fabric | NeoForge |
+
+On Fabric the config screen opens from **Mod Menu**. On Forge and NeoForge it opens from the built-in mods list. See [config](./config#in-game-config-screen).
+
+---
+
+## Sleep mods
+
+This mod is compatible with the **Sleep Tight** mod.
+
+Mods that let the night pass gradually while players stay in bed, such as **Better Days** and **Seamless Sleep**, work with Midnight Thoughts. The overlay is shown while players sleep, and the summary and the Well Rested effect arrive once the night is over and the sleepers get up.
 
 <Admonition type="warning">
-    This mod is **not fully compatible** with mods that directly alter sleep mechanics, such as the night-to-day skip. Features like overlays and nightmares will work, but summary screens and Well Rested effects will not.
+    The overlay, the summary and Well Rested all rely on players actually lying in a bed. Mods that skip the night without anyone sleeping, for example through a vote or a command, do not trigger them.
 </Admonition>
 
-If a mod has the ability to **disable** the night-to-day skip mechanic, such as the **Better Days** mod, then Midnight Thoughts will work completely with it.
+---
+
+## Integrations
+
+<Admonition type="info">
+    Both integrations are optional and only affect the [summary screen](./summary-screen#integrations). Nothing needs to be configured.
+</Admonition>
+
+| Mod | What it adds |
+|---|---|
+| **MCA Reborn** | Players who use the MCA skin option get their MCA head on the summary card instead of the vanilla one |
+| **Serene Seasons** | Hovering over the day badge on the summary card shows the current season and the day within it |
 
 ---
 
 ## KubeJS
 
 <Admonition type="tip">
-    KubeJS is supported as an **optional** dependency. If it is present, the mod registers a binding and five events; if it is absent, nothing changes and nothing is logged. See [KubeJS](./kubejs).
+    KubeJS is supported as an **optional** dependency. If it is present, the mod registers a binding and five events. If it is absent, nothing changes and nothing is logged. See [KubeJS](./kubejs).
 </Admonition>
 
 ---
 
 ## Other mods
 
-Because the comfort system is built on **block tags**, blocks from other mods can be made to count towards comfort with a small data pack - no compatibility patch needed on either side. The [comfort system](./comfort-system) page shows the format.
+Because the comfort system is built on **block tags**, blocks from other mods can be made to count towards comfort with a small data pack, with no compatibility patch needed on either side. The [comfort system](./comfort-system) page shows the format.
+
+Well Rested accepts **attributes and potion effects from any mod**. Add their ids to a level in the config and they work like the vanilla ones. See [Well Rested](./well-rested).
 
 Mods that want deeper integration can listen to the [Java API](./java-api) events, including overriding the comfort result entirely.
 
@@ -33,5 +60,5 @@ Mods that want deeper integration can listen to the [Java API](./java-api) event
 ## Client and server
 
 <Admonition type="warning">
-    The mod must be installed on **both** the client and the server, in the **same version**. It is not a client-side or server-side only mod - the overlay and summary live on the client, while comfort, statistics and effects live on the server.
+    The mod must be installed on **both** the client and the server, in the **same version**. It is not a client-side or server-side only mod. The overlay and summary live on the client, while comfort, statistics and effects live on the server.
 </Admonition>

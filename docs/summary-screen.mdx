@@ -4,8 +4,58 @@ import Admonition from '@theme/Admonition';
 
 # Summary screen
 
-Player statistics collected since the last sleep are displayed on the summary screen.
-The summary screen has four different themes that can be easily switched between.
+After waking up, every player who slept receives a diary of everything they did since their last sleep. The screen has four themes.
+
+---
+
+## The card
+
+The summary shows **one card per player**. In single player that is just your own card, on a server every player who slept that night gets one.
+
+| Part of the card | What it shows |
+|---|---|
+| Headline | Whose results these are: `Since last sleep you`, `Since last sleep you are MVP`, `Steve's results` or `Steve became MVP` |
+| Player head | The player's skin. With [MCA Reborn](#integrations) it can show the MCA skin instead |
+| Day badge | The current day of the world, for example `Day 42` |
+| Stats panel | Hover over it to see all six statistics |
+| Achievements | Up to three achievement tokens earned this night |
+
+**Stats panel.** Hover over the panel and a large tooltip lists the results as short lines:
+
+```
+mined 120 blocks
+walked 2,431 blocks
+killed 14 mobs
+died 1 time
+jumped 306 times
+dealt 95 damage
+```
+
+The words follow the game language, including the right plural forms. What each number means is on the [player statistics](./player-statistics) page.
+
+**Achievements.** Each achievement is a small token under the stats panel. Hover over a token to see its name and description. A card shows up to three of them. Custom achievements work the same way, see [custom achievements](./custom-achievements).
+
+**MVP.** The MVP card has its own frame, so it stands out from the others. See [player statistics](./player-statistics) for how the MVP is chosen.
+
+---
+
+## Flipping through cards
+
+When more than one player slept, arrow buttons appear under the card.
+
+| Action | Mouse | Keyboard |
+|---|---|---|
+| Previous card | Left arrow button | Your **Strafe Left** key, `A` by default |
+| Next card | Right arrow button | Your **Strafe Right** key, `D` by default |
+| Close | | Your **Inventory** key, `E` by default, or `Esc` |
+
+The keys follow your own controls, so if you moved strafing to other keys, those keys flip the cards.
+
+The cards are sorted: the MVP comes first, then your own card, then everyone else.
+
+<Admonition type="note">
+    The summary does not pause the game, even in single player.
+</Admonition>
 
 ---
 
@@ -33,7 +83,7 @@ The summary screen has four different themes that can be easily switched between
     <TabItem value="magic" label="Magic">
 
         ![Magic](/img/magic.png)
-        The Magic theme is inspired by Avatar: The Last Airbender. Suitable for magic-based modpacks.
+        The Magic theme has a gothic style inspired by Black Clover. Suitable for magic-based modpacks.
 
     </TabItem>
 </Tabs>
@@ -42,17 +92,40 @@ The summary screen has four different themes that can be easily switched between
 
 ## Switching themes
 
-In the upper right corner of the summary screen, there's a gear-shaped button. Clicking it changes the theme. Each player can choose a custom theme, and it will only be displayed for them.
-
-The default theme on the server is determined by the config parameter:
+The theme is picked in the config screen, in the **Interface** section, or in the config file:
 
 ```json
 "theme": "classic"
 ```
 
-Available options: `classic`, `vanilla`, `tech`, `magic`.
+Available options: `classic`, `vanilla`, `tech`, `magic`. The theme applies to the summary screen and to the sleeping players HUD.
 
-If a player changes their theme, that theme will be displayed regardless of the server's default theme.
+On a server, the theme is determined by the server itself, so every player sees the same one.
+
+<Admonition type="info" title="Changed in 1.6">
+    The gear button on the summary screen was removed, and with it the personal theme and the `hideThemeSwitchButton` option. The theme now lives in the config screen together with the other settings.
+</Admonition>
+
+---
+
+## Integrations
+
+<Tabs>
+    <TabItem value="mca" label="MCA Reborn" default>
+
+        If [MCA Reborn](https://modrinth.com/mod/minecraft-comes-alive-reborn) is installed and a player uses the MCA skin option, the card shows their MCA head instead of the vanilla one. Players with a regular skin keep their normal head.
+
+    </TabItem>
+    <TabItem value="seasons" label="Serene Seasons">
+
+        If [Serene Seasons](https://modrinth.com/mod/serene-seasons) is installed, hover over the day badge to see the Serene Seasons calendar: the current season and the day within it, for example `Mid Autumn` and `Day 3/8`. In tropical biomes it shows the tropical season instead.
+
+    </TabItem>
+</Tabs>
+
+<Admonition type="note">
+    Both integrations are optional and only run on the client. Without these mods the card simply shows the vanilla head and a day badge without a tooltip.
+</Admonition>
 
 ---
 
@@ -60,16 +133,11 @@ If a player changes their theme, that theme will be displayed regardless of the 
 
 | Parameter | Default | Description |
 |---|---|---|
-| `theme` | `"classic"` | Default theme for all players on the server |
-| `hideThemeSwitchButton` | `false` | Set to `true` to disable players' ability to change themes |
+| `theme` | `"classic"` | Theme for all players |
 | `enableDailySummaryScreen` | `true` | Set to `false` to completely disable the summary screen |
 
-<Admonition type="tip">
-    Setting `hideThemeSwitchButton: true` removes the gear button from the summary screen, preventing players from changing their personal theme.
-</Admonition>
-
 <Admonition type="note">
-    An invalid theme name in the config is not an error - it resets to `classic` and the correction is written to the server log. The same applies to a player's personal choice.
+    An invalid theme name in the config is not an error. It resets to `classic` and the correction is written to the server log.
 </Admonition>
 
 ---
@@ -78,7 +146,9 @@ If a player changes their theme, that theme will be displayed regardless of the 
 
 The summary is shown to players who **actually slept** that night.
 
-If a player got out of bed on their own before morning and never went back, they do not get a summary - the night was skipped by others, not by them. A player who tried to sleep and was refused because of low [comfort](./comfort-system) also does not count as having gone back to bed.
+If a player got out of bed on their own before morning and never went back, they do not get a summary, because the night was skipped by others, not by them. A player who tried to sleep and was refused because of low [comfort](./comfort-system) also does not count as having gone back to bed.
+
+The summary is sent once the night is over and **every sleeper has left the bed**. With vanilla sleep this is the moment everyone wakes up. Mods that let the night pass gradually, such as **Better Days** or **Seamless Sleep**, keep players in bed while time speeds up, so the summary waits until they get up instead of appearing while someone is still asleep.
 
 <Admonition type="tip">
     This ties into the vanilla `playerSleepingPercentage` gamerule. Details on the [for servers](./for-servers) page.

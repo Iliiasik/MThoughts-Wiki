@@ -7,7 +7,7 @@ import Admonition from '@theme/Admonition';
 If [KubeJS](https://www.curseforge.com/minecraft/mc-mods/kubejs) is installed, Midnight Thoughts exposes a binding and five events, so you can react to sleep, hand out the Rested effect, and even override how comfortable a bedroom is - all from a script, with no Java and no recompiling.
 
 <Admonition type="info" title="Optional dependency">
-    KubeJS is entirely optional. The mod detects it at load time; without it nothing changes and no errors are printed.
+    KubeJS is entirely optional. The mod detects it at load time. Without it nothing changes and no errors are printed.
 </Admonition>
 
 <Admonition type="note">
@@ -22,7 +22,7 @@ The global object is called `MidnightThoughts`.
 
 | Method | Returns | Description |
 |---|---|---|
-| `grantWellRested(player, level)` | - | Applies the Rested effect at level 1–5 |
+| `grantWellRested(player, level)` | - | Applies the Rested effect at level 1 to 5 |
 | `grantMvp(player)` | - | Applies the MVP variant of the effect |
 | `clearWellRested(player)` | - | Removes the effect |
 | `hasWellRested(player)` | `boolean` | Whether the effect is currently active |
@@ -61,7 +61,7 @@ All events are registered under the `MidnightThoughtsEvents` group.
         | Getter | Type | Description |
         |---|---|---|
         | `getPlayer()` | `ServerPlayer` | Who received the effect |
-        | `getLevel()` | `int` | Effect level, 1–5 |
+        | `getLevel()` | `int` | Effect level, 1 to 5 |
         | `isMvp()` | `boolean` | Whether this is the MVP variant |
         | `getDurationTicks()` | `int` | Total duration in ticks |
 
@@ -173,8 +173,14 @@ MidnightThoughtsEvents.comfortCalculated(event => {
 
 ## Availability
 
+| Minecraft | Loaders with KubeJS integration |
+|---|---|
+| 1.20.1 | Forge, Fabric |
+| 1.21.1 | NeoForge |
+| 26.1.2 | NeoForge |
+
 <Admonition type="info">
-    The integration ships with the Forge and NeoForge builds, on the Minecraft versions where a matching KubeJS build exists. There is no KubeJS integration in the Fabric build. If you load the mod where KubeJS is unavailable, the integration simply does not register - everything else works as normal.
+    The binding, the five events and the scripts on this page are the same on every loader listed above. The Fabric builds for 1.21.1 and 26.1.2 have no KubeJS integration. If you load the mod where KubeJS is unavailable, the integration simply does not register, and everything else works as normal.
 </Admonition>
 
 Java mod developers who want the same hooks without KubeJS should use the [Java API](./java-api) instead.

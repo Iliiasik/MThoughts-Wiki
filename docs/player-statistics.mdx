@@ -15,9 +15,9 @@ The mod collects the following player statistics:
 | Mobs killed | Number of mobs killed |
 | Damage dealt | Amount of damage dealt |
 
-After players sleep, they will see a summary of the accumulated data since their last sleep. In addition to statistics, achievements are also displayed. The default achievements are stat records: distance record, block mining record, and mob kill record.
+After players sleep, they will see a summary of the accumulated data since their last sleep. On the summary card the statistics are shown in the tooltip of the stats panel, see [summary screen](./summary-screen). In addition to statistics, achievements are also displayed. The default achievements are stat records: distance record, block mining record, and mob kill record.
 
-Custom achievements are also displayed; more information is available in the [custom achievements](./custom-achievements) tab.
+Custom achievements are also displayed, more information is available in the [custom achievements](./custom-achievements) tab.
 
 <Admonition type="note">
     Statistics are counted **since your last sleep**, not since the world began, and each player has their own counter. If someone else sleeps while you are awake, your numbers keep running.
@@ -29,7 +29,7 @@ Records - best distance, most blocks, most mobs - and unlocked achievements pers
 
 ## MVP
 
-Multiplayer features an MVP - the player with the most points since their last sleep. If other players slept while a player was awake, their stats are not reset; the counter is unique to each player.
+Multiplayer features an MVP: the player with the most points since their last sleep. If other players slept while a player was awake, their stats are not reset. The counter is unique to each player.
 
 <Tabs>
     <TabItem value="points" label="Points" default>
@@ -65,11 +65,13 @@ Multiplayer features an MVP - the player with the most points since their last s
     `minScoreRequired: 10` - the minimum number of points required to be an MVP. If no player reaches this threshold, there will be no MVP that night.
 </Admonition>
 
-The MVP receives a separate buff - as powerful as Well Rested level 5, but with a different duration (`mvpWellRestedDurationMinutes: 21`). By default this is longer than the standard level 5 duration.
+The MVP receives a separate buff, with the same attributes and effects as Well Rested level 5, but with a different duration (`mvpWellRestedDurationMinutes: 21`). By default this is longer than the standard level 5 duration. The MVP always gets this buff, no matter how comfortable their bed was.
+
+On the summary screen the MVP card comes first and has its own frame.
 
 ![MVP](/img/mvp.png)
 
-All parameters listed above are configurable and can be adjusted in the mod's config file.
+All parameters listed above are configurable, in the config file or in the **MVP scoring** section of the config screen.
 
 <Admonition type="tip">
     MVP functionality can be completely disabled by setting `"enabled": false` in the config.
