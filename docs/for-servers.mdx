@@ -72,10 +72,10 @@ Install the same jar on the server and on every client and there is nothing else
 
 ## Server-authoritative settings
 
-When a player joins, the server sends its own config, and that copy is used for the session. Overlay timings, opacity, comfort weights and thresholds, the theme and the HUD toggles are therefore identical for everyone, regardless of what each player has in their local file. The only exception is the summary size, `summaryScale`, which each player keeps for their own monitor.
+When a player joins, the server sends its own config, and that copy is used for the session. Overlay timings, opacity, comfort weights and thresholds, the theme and the HUD toggles are therefore identical for everyone, regardless of what each player has in their local file. The only exceptions are the summary size and style, `summaryScale` and `summaryStyle`, which each player keeps for themselves.
 
 <Admonition type="note">
-    While connected to a server, the in-game config screen shows no sections, only a note that the settings come from the server's config file. Server owners change settings in `config/midnightthoughts.json` on the server.
+    While connected to a server, the in-game config screen shows only the **Personal** section with the summary style and size, and a note that every other setting comes from the server's config file. Server owners change settings in `config/midnightthoughts.json` on the server.
 </Admonition>
 
 Changes take effect without a restart:

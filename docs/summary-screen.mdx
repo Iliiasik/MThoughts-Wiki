@@ -4,7 +4,7 @@ import Admonition from '@theme/Admonition';
 
 # Summary screen
 
-After waking up, every player who slept receives a diary of everything they did since their last sleep. The screen has four themes.
+After waking up, every player who slept receives a diary of everything they did since their last sleep. The screen has four themes and two styles: **Picture** and **Table**.
 
 ---
 
@@ -17,21 +17,10 @@ The summary shows **one card per player**. In single player that is just your ow
 | Headline | Whose results these are: `Since last sleep you`, `Since last sleep you are MVP`, `Steve's results` or `Steve became MVP` |
 | Player head | The player's skin. With [MCA Reborn](#integrations) it can show the MCA skin instead |
 | Day badge | The current day of the world, for example `Day 42` |
-| Stats panel | Hover over it to see all six statistics |
+| Stats panel | All six statistics. In the Picture style hover over it, in the Table style they are listed right on the panel |
 | Achievements | Up to three achievement tokens earned this night |
 
-**Stats panel.** Hover over the panel and a large tooltip lists the results as short lines:
-
-```
-mined 120 blocks
-walked 2,431 blocks
-killed 14 mobs
-died 1 time
-jumped 306 times
-dealt 95 damage
-```
-
-The words follow the game language, including the right plural forms. What each number means is on the [player statistics](./player-statistics) page.
+**Stats panel.** How the statistics are shown depends on the [summary style](#summary-style). What each number means is on the [player statistics](./player-statistics) page.
 
 **Achievements.** Each achievement is a small token under the stats panel. Hover over a token to see its name and description. A card shows up to three of them. Custom achievements work the same way, see [custom achievements](./custom-achievements).
 
@@ -59,6 +48,65 @@ The cards are sorted: the MVP comes first, then your own card, then everyone els
 
 ---
 
+## Summary style
+
+The stats panel has two styles. Switch between them with **Summary style** in the config screen, or set `summaryStyle` in the file.
+
+<Tabs groupId="summary-style">
+    <TabItem value="picture" label="Picture" default>
+
+        The default. The panel shows an illustration, and hovering over it opens a large tooltip with the results as short lines:
+
+        ```
+        Mined 120 blocks
+        Walked 2.4K blocks
+        Killed 14 mobs
+        Died 1 time
+        Jumped 306 times
+        Dealt 95 damage
+        ```
+
+        The words follow the game language, including the right plural forms.
+
+        ```json
+        "summaryStyle": "picture"
+        ```
+
+    </TabItem>
+    <TabItem value="table" label="Table">
+
+        Every statistic is listed right on the panel, no hovering needed. The name is on the left, the number on the right:
+
+        ```
+        Mined         120
+        Traveled     2.4K
+        Slain          14
+        Deaths          1
+        Leaps         306
+        Damage         95
+        ```
+
+        When the summary opens, the numbers count up from zero to their real values. Flipping to another card starts the count again.
+
+        ```json
+        "summaryStyle": "table"
+        ```
+
+    </TabItem>
+</Tabs>
+
+Achievements, the head, the day badge and everything else on the card look the same in both styles. Pictures of both styles for every theme are in the [themes](#themes) section below.
+
+<Admonition type="note">
+    Like the summary size, this is a personal setting. It is read from your own config file even on a server, so every player can pick the style they like. On a server, open the config screen and use the **Personal** section.
+</Admonition>
+
+<Admonition type="tip" title="For modpacks and servers with their own pack">
+    The style and the size are taken from the player's own `config/midnightthoughts.json`. To make the table style the default in your pack, ship that file with `"summaryStyle": "table"`. Players can still switch it for themselves.
+</Admonition>
+
+---
+
 ## Summary size
 
 By default the summary is as large as the screen allows. If it looks too big next to the rest of the interface, change **Summary size** in the config screen, in the **Interface** section, or set `summaryScale` in the file:
@@ -74,7 +122,7 @@ The summary never grows past the screen. If the chosen size does not fit, it use
 Every size is a whole multiple, so the textures and the text always stay sharp.
 
 <Admonition type="note">
-    This is a personal setting. It is read from your own config file even on a server, so every player can pick the size that suits their monitor. The config screen is empty while you are connected to a server, so change it from the main menu or in single player.
+    This is a personal setting. It is read from your own config file even on a server, so every player can pick the size that suits their monitor. On a server, open the config screen and use the **Personal** section.
 </Admonition>
 
 ---
@@ -84,25 +132,73 @@ Every size is a whole multiple, so the textures and the text always stay sharp.
 <Tabs>
     <TabItem value="vanilla" label="Vanilla" default>
 
-        ![Vanilla](/img/vanilla.png)
+        <Tabs groupId="summary-style">
+            <TabItem value="picture" label="Picture" default>
+
+                ![Vanilla, picture style](/img/vanilla.png)
+
+            </TabItem>
+            <TabItem value="table" label="Table">
+
+                ![Vanilla, table style](/img/vanilla_table.png)
+
+            </TabItem>
+        </Tabs>
+
         The Vanilla theme is designed in a Minecraft style to blend in with the overall vanilla theme. It's compatible with QOL modpacks.
 
     </TabItem>
     <TabItem value="classic" label="Classic">
 
-        ![Classic](/img/classic.png)
+        <Tabs groupId="summary-style">
+            <TabItem value="picture" label="Picture" default>
+
+                ![Classic, picture style](/img/classic.png)
+
+            </TabItem>
+            <TabItem value="table" label="Table">
+
+                ![Classic, table style](/img/classic_table.png)
+
+            </TabItem>
+        </Tabs>
+
         The Classic theme is the default. It features a medieval style and is suitable for classic RPG modpacks.
 
     </TabItem>
     <TabItem value="tech" label="Tech">
 
-        ![Tech](/img/tech.png)
+        <Tabs groupId="summary-style">
+            <TabItem value="picture" label="Picture" default>
+
+                ![Tech, picture style](/img/tech.png)
+
+            </TabItem>
+            <TabItem value="table" label="Table">
+
+                ![Tech, table style](/img/tech_table.png)
+
+            </TabItem>
+        </Tabs>
+
         The Tech theme is more specific. It's inspired by Final Fantasy 7 and is suitable for more technical-biological modpacks.
 
     </TabItem>
     <TabItem value="magic" label="Magic">
 
-        ![Magic](/img/magic.png)
+        <Tabs groupId="summary-style">
+            <TabItem value="picture" label="Picture" default>
+
+                ![Magic, picture style](/img/magic.png)
+
+            </TabItem>
+            <TabItem value="table" label="Table">
+
+                ![Magic, table style](/img/magic_table.png)
+
+            </TabItem>
+        </Tabs>
+
         The Magic theme has a gothic style inspired by Black Clover. Suitable for magic-based modpacks.
 
     </TabItem>
@@ -155,6 +251,8 @@ On a server, the theme is determined by the server itself, so every player sees 
 |---|---|---|
 | `theme` | `"classic"` | Theme for all players |
 | `enableDailySummaryScreen` | `true` | Set to `false` to completely disable the summary screen |
+| `summaryStyle` | `"picture"` | `picture` or `table`. Personal setting, see [summary style](#summary-style) |
+| `summaryScale` | `0` | `0` is Auto, `1` to `4` is a fixed size. Personal setting, see [summary size](#summary-size) |
 
 <Admonition type="note">
     An invalid theme name in the config is not an error. It resets to `classic` and the correction is written to the server log.

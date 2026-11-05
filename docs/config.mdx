@@ -26,7 +26,7 @@ The screen is split into five sections:
 | Section | What is inside |
 |---|---|
 | **Sleep overlay** | Overlay, moon, stardust, space objects, slide times, fades, opacity, text and moon size, facts API, custom content, chat and HUD messages |
-| **Interface** | Theme, Well Rested HUD position, hiding the Well Rested HUD and the sleeping players HUD, summary size |
+| **Interface** | Theme, summary style, Well Rested HUD position, hiding the Well Rested HUD and the sleeping players HUD, summary size |
 | **MVP scoring** | MVP on or off, points, death penalty, MVP buff duration |
 | **Comfort** | Comfort on or off, scan radius, nightmares, sleep block, all eight weights |
 | **Server behaviour** | Phantom timer for non-sleepers, vanilla sleep messages |
@@ -42,7 +42,7 @@ The screen works from the main menu and in single player. Every option has a too
 </Admonition>
 
 <Admonition type="tip" title="On a server">
-    While you are connected to a server, the config screen shows no sections, only a note. On a server every setting comes from the server's own config file, so editing your local copy there would change nothing.
+    While you are connected to a server, the config screen shows only one section, **Personal**, with the summary style and the summary size. These two are read from your own file even on a server. Every other setting comes from the server's own config file, so editing your local copy there would change nothing.
 </Admonition>
 
 ---
@@ -325,7 +325,8 @@ The screen works from the main menu and in single player. Every option has a too
     "wellRestedHudPosition": "left",
     "hideWellRestedHud": false,
     "hideSleepingPlayersHud": false,
-    "summaryScale": 0
+    "summaryScale": 0,
+    "summaryStyle": "picture"
   }
 }
 ```
@@ -362,6 +363,7 @@ The `ui` section is spread across several features, so here it is in one place:
 | `hideWellRestedHud` | `false` | Hides the Rested effect bar with its level and remaining time. See [Well Rested](./well-rested) |
 | `hideSleepingPlayersHud` | `false` | Hides the `Sleeping 2/5` plate shown while anyone on the server is asleep. See [for servers](./for-servers) |
 | `summaryScale` | `0` | Size of the summary screen. `0` is Auto, `1` to `4` is a fixed size. Personal setting, never taken from the server. See [summary screen](./summary-screen#summary-size) |
+| `summaryStyle` | `"picture"` | How the statistics are shown on the summary card, `picture` or `table`. Personal setting, never taken from the server. See [summary screen](./summary-screen#summary-style) |
 
 <Admonition type="note">
     Both `hide` flags are `false` by default, which means everything is shown. Setting one to `true` hides that element for every player on the server.
@@ -377,7 +379,7 @@ The `ui` section is spread across several features, so here it is in one place:
 
 Most settings are **server-authoritative**. When you join a server, it sends its config to your client, and that copy wins over your local file for the session. This keeps overlay timings, opacity, comfort rules and the theme consistent for everyone.
 
-The only exception is `summaryScale`. It depends on each player's monitor, so it is always read from the player's own file, also on a server.
+The only exceptions are `summaryScale` and `summaryStyle`. They are a matter of each player's monitor and taste, so they are always read from the player's own file, also on a server.
 
 <Admonition type="tip">
     In single player your own file is used, and the config screen edits it directly.
@@ -427,6 +429,8 @@ The config is checked every time it is read. Values that make no sense are corre
         `"theme"` only accepts `classic`, `vanilla`, `tech` or `magic`. Anything else resets to `classic`.
 
         `"wellRestedHudPosition"` only accepts `left`, `bar` or `right`. Anything else resets to `left`.
+
+        `"summaryStyle"` only accepts `picture` or `table`. Anything else resets to `picture`.
 
         An attribute `"operation"` that is not one of the known operations resets to `add_value`.
 
