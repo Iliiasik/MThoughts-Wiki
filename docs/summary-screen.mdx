@@ -260,13 +260,66 @@ On a server, the theme is determined by the server itself, so every player sees 
 
 ---
 
-## Who sees it
+## When the summary arrives
 
-The summary is shown to players who **actually slept** that night.
+The summary follows the vanilla sleep rules. It is shown to players who **actually slept** through the night, at the moment their night is over.
 
-If a player got out of bed on their own before morning and never went back, they do not get a summary, because the night was skipped by others, not by them. A player who tried to sleep and was refused because of low [comfort](./comfort-system) also does not count as having gone back to bed.
+### In the Overworld
 
-The summary is sent once the night is over and **every sleeper has left the bed**. With vanilla sleep this is the moment everyone wakes up. Mods that let the night pass gradually, such as **Better Days** or **Seamless Sleep**, keep players in bed while time speeds up, so the summary waits until they get up instead of appearing while someone is still asleep.
+The summary is sent once morning comes in the Overworld and **every player who slept has left the bed**. With vanilla sleep this is the moment everyone wakes up. Mods that let the night pass gradually, such as **Better Days** or **Seamless Sleep**, keep players in bed while time speeds up, so the summary waits until they get up instead of appearing while someone is still asleep.
+
+Morning here is the vanilla morning, the same moment the game itself uses to wake players up. So the summary always arrives together with everything else the game and other mods do in the morning.
+
+<Admonition type="note" title="Thunderstorms">
+    The game treats a thunderstorm as night. If a storm was going when you woke up, the summary arrives a little later, once the storm calms down. With vanilla settings this takes a couple of seconds.
+</Admonition>
+
+<Admonition type="note" title="Daylight cycle off">
+    If the daylight cycle game rule is off, the time never moves and morning never comes. The summary arrives once the time is set to day.
+</Admonition>
+
+### Sleeping during a thunderstorm
+
+During a thunderstorm you can lie down even in the middle of the day, the game counts it as night.
+
+| What happens | Summary |
+|---|---|
+| Enough players sleep and the storm is skipped | Yes, as soon as everyone is up. Time jumps to the next morning and the storm clears |
+| No skip, you stay in bed until the storm ends on its own | Yes, when the storm ends |
+| You get up during the storm | No |
+
+### Getting up too early
+
+You get no summary and no Well Rested if your sleep did not last until morning:
+
+- you got out of bed on your own
+- your bed was broken while you slept
+- you took damage, died or were teleported while in bed
+
+If you lie down again and sleep through the rest of the night, you get the summary as usual. A player who tried to sleep and was refused because of low [comfort](./comfort-system) does not count as having slept.
+
+### Other dimensions
+
+Some mods add dimensions where you can sleep. Midnight Thoughts supports them, and the summary depends on how time works there.
+
+| Dimension | When you get the summary |
+|---|---|
+| **Frozen time**, the sun never moves, for example the Twilight Forest | Right after the dimension wakes you up. You can sleep there at any time, and you never wait for the Overworld morning |
+| **Time shared with the Overworld** | Together with the Overworld morning, in the same summary as the Overworld sleepers. If your dimension wakes you up earlier, you get your own summary right away |
+
+A player sleeping in a dimension with frozen time never delays the summary for players in the Overworld. Players who wake up there together share one summary.
+
+<Admonition type="info">
+    Whether you can sleep in a dimension is decided by the mod that adds it. On 26.1.2 the Twilight Forest does not allow sleeping, its beds only set the spawn point.
+</Admonition>
+
+### MVP
+
+The MVP is picked among the players who woke up together. If players in the Overworld and in another dimension wake up separately, each group gets its own summary and its own MVP. A summary with a single player has no MVP.
+
+### Sleep mods
+
+A sleep mod works with Midnight Thoughts if it wakes players at the vanilla morning or later. **Better Days** and **Seamless Sleep** do. See [compatibility](./compatibility#sleep-mods).
 
 <Admonition type="tip">
     This ties into the vanilla `playerSleepingPercentage` gamerule. Details on the [for servers](./for-servers) page.
