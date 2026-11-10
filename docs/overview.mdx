@@ -6,6 +6,12 @@ title: Home
 
 import Admonition from '@theme/Admonition';
 import DocCardList from '@theme/DocCardList';
+import {useCurrentSidebarSiblings} from '@docusaurus/plugin-content-docs/client';
+
+export function WikiPages() {
+    const items = useCurrentSidebarSiblings().filter((item) => item.docId !== 'nightmares');
+    return <DocCardList items={items} />;
+}
 
 ![Title](/img/title.png)
 
@@ -57,4 +63,4 @@ Modpack authors adding their own rules should look at [KubeJS](./kubejs) or the 
 
 ## All pages
 
-<DocCardList />
+<WikiPages />

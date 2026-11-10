@@ -105,6 +105,11 @@ const sidebars: SidebarsConfig = {
       id: 'compatibility',
       label: 'Compatibility',
     },
+    {
+      type: 'doc',
+      id: 'nightmares',
+      label: 'Horror version',
+    },
   ],
 };
 
