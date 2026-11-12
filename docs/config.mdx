@@ -26,8 +26,8 @@ The screen is split into five sections:
 | Section | What is inside |
 |---|---|
 | **Sleep overlay** | Overlay, moon, stardust, space objects, slide times, fades, opacity, text and moon size, facts API, custom content, chat and HUD messages |
-| **Interface** | Theme, summary style, Well Rested HUD position, hiding the Well Rested HUD and the sleeping players HUD, summary size |
-| **MVP scoring** | MVP on or off, points, death penalty, MVP buff duration |
+| **Interface** | Theme, summary style, Well Rested HUD position, hiding the Well Rested HUD and the sleeping players HUD, summary size, season integrations |
+| **MVP scoring** | MVP on or off, points, death penalty, MVP buff duration, experience for the day and its limit |
 | **Comfort** | Comfort on or off, scan radius, nightmares, sleep block, all eight weights |
 | **Server behaviour** | Phantom timer for non-sleepers, vanilla sleep messages |
 
@@ -298,6 +298,11 @@ The screen works from the main menu and in single player. Every option has a too
     "penaltyPerDeath": 30,
     "mvpWellRestedDurationMinutes": 21
   },
+  "experience": {
+    "enabled": true,
+    "experiencePerPoint": 0.03,
+    "maxExperiencePerSleep": 0
+  },
   "comfort": {
     "enabled": true,
     "scanRadius": 5,
@@ -327,6 +332,10 @@ The screen works from the main menu and in single player. Every option has a too
     "hideSleepingPlayersHud": false,
     "summaryScale": 0,
     "summaryStyle": "picture"
+  },
+  "integrations": {
+    "sereneSeasons": true,
+    "eclipticSeasons": true
   }
 }
 ```
@@ -348,9 +357,11 @@ The screen works from the main menu and in single player. Every option has a too
 | `sleepOverlay` | [Sleep overlay](./sleep-overlay), plus [custom facts](./custom-facts) for `useFactsApi` and `userContentReplaces`, and [summary screen](./summary-screen) for `enableDailySummaryScreen` |
 | `wellRested` | [Well Rested](./well-rested) |
 | `mvp` | [Player statistics](./player-statistics) |
+| `experience` | [Player statistics](./player-statistics#experience-for-the-day) |
 | `comfort` | [Comfort system](./comfort-system) |
 | `server` | [For servers](./for-servers) |
 | `ui` | See the table below |
+| `integrations` | [Summary screen](./summary-screen#integrations) |
 
 ### UI settings
 
@@ -420,6 +431,8 @@ The config is checked every time it is read. Values that make no sense are corre
         | Comfort weights | -100 to 100 |
         | `minScoreRequired` | 0 to 1000000 |
         | Other MVP point values | 0 to 100000 |
+        | `experiencePerPoint` | 0.0 to 10.0 |
+        | `maxExperiencePerSleep` | 0 to 1000000 |
 
         If `maxSlideDisplayTimeMs` ends up below `minSlideDisplayTimeMs`, it is raised to match.
 

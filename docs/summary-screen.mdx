@@ -15,7 +15,7 @@ The summary shows **one card per player**. In single player that is just your ow
 | Part of the card | What it shows |
 |---|---|
 | Headline | Whose results these are: `Since last sleep you`, `Since last sleep you are MVP`, `Steve's results` or `Steve became MVP` |
-| Player head | The player's skin. With [MCA Reborn](#integrations) it can show the MCA skin instead |
+| Player head | The player's skin. With [MCA Reborn](#integrations) it can show the MCA skin instead. Hover over it to see the [rewards](#rewards) |
 | Day badge | The current day of the world, for example `Day 42` |
 | Stats panel | All six statistics. In the Picture style hover over it, in the Table style they are listed right on the panel |
 | Achievements | Up to three achievement tokens earned this night |
@@ -25,6 +25,20 @@ The summary shows **one card per player**. In single player that is just your ow
 **Achievements.** Each achievement is a small token under the stats panel. Hover over a token to see its name and description. A card shows up to three of them. Custom achievements work the same way, see [custom achievements](./custom-achievements).
 
 **MVP.** The MVP card has its own frame, so it stands out from the others. See [player statistics](./player-statistics) for how the MVP is chosen.
+
+### Rewards
+
+Hover over the player head to see what the player got for the night:
+
+```
+Rewards
++45 experience
+Well Rested, level 2
+```
+
+For the MVP the second line reads `Well Rested for the MVP`. A player who got neither experience nor Well Rested has no rewards tooltip. The tooltip works the same in both [summary styles](#summary-style).
+
+How the experience is calculated is on the [player statistics](./player-statistics#experience-for-the-day) page.
 
 ---
 
@@ -237,10 +251,32 @@ On a server, the theme is determined by the server itself, so every player sees 
         If [Serene Seasons](https://modrinth.com/mod/serene-seasons) is installed, hover over the day badge to see the Serene Seasons calendar: the current season and the day within it, for example `Mid Autumn` and `Day 3/8`. In tropical biomes it shows the tropical season instead.
 
     </TabItem>
+    <TabItem value="ecliptic" label="Ecliptic Seasons">
+
+        If [Ecliptic Seasons](https://modrinth.com/mod/ecliptic-seasons) is installed, hover over the day badge to see the current solar term and the day within it, for example `Spring Equinox` and `Day 2/7`. On Fabric the same works with [Ecliptic Seasons: Fabricated](https://modrinth.com/mod/ecliptic-seasons-fabricated).
+
+    </TabItem>
 </Tabs>
 
+If both season mods are installed, the tooltip shows Serene Seasons on top and Ecliptic Seasons below.
+
 <Admonition type="note">
-    Both integrations are optional and only run on the client. Without these mods the card simply shows the vanilla head and a day badge without a tooltip.
+    The season counters belong to the season mods. Right after waking up the tooltip can still show the previous day for a moment, until the season mod sends the new day.
+</Admonition>
+
+Each season integration can be switched off, for example if your modpack uses one mod for the calendar and the other only for the weather:
+
+```json
+"integrations": {
+  "sereneSeasons": true,
+  "eclipticSeasons": true
+}
+```
+
+Both switches are also in the **Interface** section of the config screen. On a server they come from the server's config file.
+
+<Admonition type="note">
+    All integrations are optional. Without these mods the card simply shows the vanilla head and a day badge without a tooltip.
 </Admonition>
 
 ---

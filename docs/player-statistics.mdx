@@ -76,3 +76,56 @@ All parameters listed above are configurable, in the config file or in the **MVP
 <Admonition type="tip">
     MVP functionality can be completely disabled by setting `"enabled": false` in the config.
 </Admonition>
+
+---
+
+## Experience for the day
+
+After sleeping, every player gets experience for what they did since their last sleep. It uses the same points as the [MVP score](#mvp): the points are multiplied by `experiencePerPoint` and the fraction is dropped.
+
+The experience is given together with the summary. Only players who slept through the night get it, each one exactly their own amount.
+
+| During the day | Points | Experience |
+|---|---|---|
+| 2000 blocks traveled | 40 | 1 |
+| 20 mobs killed | 300 | 9 |
+| 500 blocks broken | 1500 | 45 |
+| 2000 blocks broken | 6000 | 180 |
+
+<Tabs>
+    <TabItem value="parameters" label="Parameters" default>
+
+        | Parameter | Default | Description |
+        |---|---|---|
+        | `enabled` | `true` | Turns experience for the day on or off |
+        | `experiencePerPoint` | `0.03` | How much experience one point is worth |
+        | `maxExperiencePerSleep` | `0` | The most experience a player can get from one sleep. `0` means no limit |
+
+    </TabItem>
+    <TabItem value="config" label="Config">
+
+        ```json
+        "experience": {
+          "enabled": true,
+          "experiencePerPoint": 0.03,
+          "maxExperiencePerSleep": 0
+        }
+        ```
+
+    </TabItem>
+</Tabs>
+
+A few rules worth knowing:
+
+- Experience does not depend on the MVP. It is given even with the MVP turned off, and in single player.
+- Changing the MVP point values also changes the experience, since both use the same points.
+- A day with more death penalty than points gives nothing, but never takes away experience the player already has.
+- A player who got out of bed before morning gets no experience, the same as with the summary.
+
+<Admonition type="tip" title="For modpacks with mob farms or big mining tools">
+    Mob farms and tools that break many blocks at once can earn a lot of points in one day. If that gives too much experience, set `maxExperiencePerSleep`, for example to `100`, instead of lowering the rate for everyone.
+</Admonition>
+
+How much experience a player got is shown on the [summary card](./summary-screen#rewards), when you hover over their head.
+
+All three parameters are in the **MVP scoring** section of the config screen. The limit slider goes up to 1000, the file accepts up to 1000000.
